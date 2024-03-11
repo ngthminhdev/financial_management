@@ -24,4 +24,6 @@ class AppColors {
 	static final lime = HexColor.fromHex('4BFACD');
 	static final orange = HexColor.fromHex('FA744B');
 	static final darkBlue = HexColor.fromHex('3B8486');
+
+	static final grey = HexColor.fromHex("#D2D1D9");
 }
