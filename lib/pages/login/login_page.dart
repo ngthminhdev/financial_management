@@ -2,7 +2,6 @@ import 'package:financial_management/core/color.dart';
 import 'package:financial_management/helper/navigator_helper.dart';
 import 'package:financial_management/router/router_config.dart';
 import 'package:financial_management/widgets/button/button_constant.dart';
-import 'package:financial_management/widgets/checkbox/checkbox_widget.dart';
 import 'package:financial_management/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -31,8 +30,8 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.9,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            height: MediaQuery.of(context).size.height * 0.85,
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 40),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -43,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                     Column(
                       children: [
                         Text(
-                          "Welcome back!",
+                          "Chào mừng trở lại!",
                           style: TextStyle(
                             color: AppColors.purple,
                             fontWeight: FontWeight.bold,
@@ -51,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         const Text(
-                          "Log In",
+                          "Quản lý tài chính cá nhân",
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -68,20 +67,20 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     FMInput(
                       controller: usernameController,
-                      label: 'User Name',
+                      label: 'Tài khoản',
                       icon: Symbols.account_child,
                     ),
                     FMInput(
                       isObscured: true,
                       controller: passwordController,
-                      label: 'Password',
+                      label: 'Mật khẩu',
                       icon: Symbols.password,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         FMCheckBox(
-                            text: "Save your account?",
+                            text: "Ghi nhớ đăng nhập?",
                             value: isSaveYourLogin,
                             onChange: (bool? value) {
                               toggleSaveLogin(value);
@@ -90,12 +89,12 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   ],
                 ),
-                FMButton(text: 'Log in', size: FMButtonSize.max),
+                FMButton(text: 'Đăng nhập', size: FMButtonSize.max),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Or create an new account?",
+                      "Bạn chưa có tài khoản?",
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -108,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                               context, RouteNames.register);
                         },
                         child: Text(
-                          'Sign up',
+                          'Đăng ký',
                           style: TextStyle(
                             color: AppColors.purple,
                             fontWeight: FontWeight.bold,

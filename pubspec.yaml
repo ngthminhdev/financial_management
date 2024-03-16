@@ -18,12 +18,20 @@ dependencies:
   formz: ^0.7.0
   equatable: ^2.0.5
   page_transition: ^2.1.0
+  intl: ^0.17.0
+  syncfusion_flutter_charts: ^19.4.56
+  syncfusion_flutter_core: ^19.4.56
+  auto_size_text: ^3.0.0
+  remixicon: ^1.2.0
+  flutter_randomcolor: ^1.0.14
+  animations: ^2.0.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  syncfusion_flutter_core: 19.4.56
 
 flutter:
 

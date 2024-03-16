@@ -27,8 +27,8 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.9,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            height: MediaQuery.of(context).size.height * 0.85,
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 40),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -39,7 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Column(
                       children: [
                         Text(
-                          "Get started!",
+                          "Chào mừng bạn!",
                           style: TextStyle(
                             color: AppColors.purple,
                             fontWeight: FontWeight.bold,
@@ -47,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                         const Text(
-                          "Create an account",
+                          "Đăng ký tài khoản mới",
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text(
-                              "Do you already have an account?",
+                              "Đã có tài khoản?",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -71,7 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       context, RouteNames.login);
                                 },
                                 child: Text(
-                                  'Login',
+                                  'Đăng nhập',
                                   style: TextStyle(
                                     color: AppColors.purple,
                                     fontWeight: FontWeight.bold,
@@ -92,24 +92,24 @@ class _RegisterPageState extends State<RegisterPage> {
                     children: [
                       FMInput(
                         controller: accountNameController,
-                        label: 'Account Name',
+                        label: 'Họ và tên',
                         icon: Symbols.account_circle,
                         validator: (text) {
                           if (text!.length < 6 || text.length > 20) {
-                            return 'Account name is between 6 and 20 characters';
+                            return 'Họ và tên cần từ 6 đến 20 ký tự';
                           }
                           return null;
                         },
                       ),
                       FMInput(
                         controller: usernameController,
-                        label: 'User Name',
+                        label: 'Tài khoản',
                         icon: Symbols.account_child,
                         validator: (text) {
                           if (text!.length < 6 || text.length > 20) {
-                            return 'User name is between 6 and 20 characters';
+                            return 'Tài khoản cần từ 6 đến 20 ký tự';
                           } else if (!whiteSpaceRegex.hasMatch(text)) {
-                            return 'User name can\'t have white space. ex: ngthminh';
+                            return 'Tài khoản không được có khoảng trắng';
                           }
                           return null;
                         },
@@ -120,7 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         icon: Symbols.email,
                         validator: (text) {
                           if (!emailRegex.hasMatch(text!)) {
-                            return 'Email is not valid';
+                            return 'Email không hợp lệ';
                           }
                           return null;
                         },
@@ -128,11 +128,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       FMInput(
                         isObscured: true,
                         controller: passwordController,
-                        label: 'Password',
+                        label: 'Mật khẩu',
                         icon: Symbols.password,
                         validator: (text) {
                           if (text!.length < 6) {
-                            return 'Password is at least 6 characters';
+                            return 'Mật khẩu ít nhất 6 ký tự';
                           }
                           return null;
                         },
@@ -140,11 +140,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       FMInput(
                         isObscured: true,
                         controller: passwordConfirmController,
-                        label: 'Confirm Passoword',
+                        label: 'Nhập lại mật khẩu',
                         icon: Symbols.password_rounded,
                         validator: (text) {
                           if (text != passwordController.text) {
-                            return 'Confirm password and password is not same';
+                            return 'Nhập lại mật khẩu không đúng';
                           }
                           return null;
                         },

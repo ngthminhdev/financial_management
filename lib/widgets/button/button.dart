@@ -6,12 +6,14 @@ class FMButton extends StatelessWidget {
   final String text;
   final FMButtonType type;
   final FMButtonSize size;
+  final Widget? icon;
   final VoidCallback? onPressed;
   const FMButton({
     Key? key,
     required this.text,
     this.type = FMButtonType.primary,
     this.size = FMButtonSize.medium,
+    this.icon,
     this.onPressed,
   }) : super(key: key);
 
@@ -107,13 +109,19 @@ class FMButton extends StatelessWidget {
           minHeight: _getButtonHeight(size),
         ),
         padding: _getButtonPadding(size),
-        child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: _getButtonTextSize(size),
-              color: _getButtonTextColor(type),
-              fontWeight: FontWeight.bold),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (icon != null) icon!,
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: _getButtonTextSize(size),
+                  color: _getButtonTextColor(type),
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
       ),
     );

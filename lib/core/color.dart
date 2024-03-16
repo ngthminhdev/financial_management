@@ -16,6 +16,8 @@ extension HexColor on Color {
 }
 
 class AppColors {
+	static final bg = HexColor.fromHex('#fafbfd'); 
+
 	static final purple = HexColor.fromHex('864AF9');
 	static final mediumPurple = HexColor.fromHex('AB81FB');
 	static final lightPurple = HexColor.fromHex('F3EDFF');
@@ -26,4 +28,10 @@ class AppColors {
 	static final darkBlue = HexColor.fromHex('3B8486');
 
 	static final grey = HexColor.fromHex("#D2D1D9");
+	static final charcoal = HexColor.fromHex("#6C6B70");
+
+	static final strongOrange = HexColor.fromHex("#fa7248");
+	static final green = HexColor.fromHex("#3fd6b1");
+	static final strongYellow = HexColor.fromHex('f9da89'); 
+
 }
