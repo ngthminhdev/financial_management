@@ -270,32 +270,46 @@ class _BudgetPageState extends State<BudgetPage> {
                       ],
                     ),
                     Divider(thickness: 1, color: appColors.grey),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            CategoryIconWidget(
-                                icon: Remix.file_edit_fill,
-                                color: appColors.green),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text("Ghi chú",
+                    GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        appPopup.textAreaPopup(context,
+                            title: Text("Chỉnh sửa ghi chú",
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
-                                    color: appColors.charcoal)),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Icon(Remix.arrow_right_s_line,
-                                color: appColors.charcoal)
-                          ],
-                        )
-                      ],
+                                    color: appColors.darkPurple)),
+                            callback: (String? value) {
+                              print('value ::: $value');
+                            },);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              CategoryIconWidget(
+                                  icon: Remix.file_edit_fill,
+                                  color: appColors.green),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text("Ghi chú",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: appColors.charcoal)),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(Remix.arrow_right_s_line,
+                                  color: appColors.charcoal)
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
