@@ -20,11 +20,11 @@ class FMButton extends StatelessWidget {
   Color _getButtonBGColor(FMButtonType type) {
     switch (type) {
       case FMButtonType.primary:
-        return AppColors.purple;
+        return appColors.purple;
       case FMButtonType.secondary:
-        return AppColors.mediumPurple;
+        return appColors.mediumPurple;
       case FMButtonType.attention:
-        return AppColors.yellow;
+        return appColors.yellow;
       case FMButtonType.text:
         return Colors.transparent;
     }
@@ -39,7 +39,7 @@ class FMButton extends StatelessWidget {
       case FMButtonType.secondary:
         return Colors.white;
       case FMButtonType.text:
-        return AppColors.purple;
+        return appColors.purple;
     }
   }
 

@@ -27,7 +27,7 @@ class _AdviceWidgetState extends State<AdviceWidget> {
       width: MediaQuery.of(context).size.width - 40,
       decoration: BoxDecoration(
         border: Border.all(
-          color: AppColors.purple,
+          color: appColors.purple,
           width: 1,
         ),
         color: Colors.transparent,

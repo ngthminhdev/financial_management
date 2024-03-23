@@ -1,4 +1,5 @@
 import 'package:financial_management/pages/analytics/analytics_page.dart';
+import 'package:financial_management/pages/budget/budget_page.dart';
 import 'package:financial_management/pages/home/home_page.dart';
 import 'package:financial_management/pages/login/login_page.dart';
 import 'package:financial_management/pages/more/more_page.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 class RouteNames {
   static const String home = 'Home';
   static const String plan = 'Plan';
+  static const String budget = 'Budget';
   static const String analytics = 'Analytics';
   static const String more = 'More';
 
@@ -23,6 +25,8 @@ class RouteCreator {
         view: ({settings, params}) => HomePage()),
     RouteNames.plan: BaseRoute(RouteNames.plan, 'Plan',
         view: ({settings, params}) => PlanPage()),
+    RouteNames.budget: BaseRoute(RouteNames.plan, 'Budget',
+        view: ({settings, params}) => BudgetPage()),
     RouteNames.analytics: BaseRoute(RouteNames.analytics, 'Analytics',
         view: ({settings, params}) => AnalyticsPage()),
     RouteNames.more: BaseRoute(RouteNames.more, 'More',

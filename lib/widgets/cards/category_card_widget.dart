@@ -46,7 +46,7 @@ class CategoryCardWidget extends StatelessWidget {
                     "${NumberHelper.formatMoney(amountUsed)}",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.strongOrange,
+                      color: appColors.strongOrange,
                     ),
                   ),
                 ],

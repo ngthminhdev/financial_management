@@ -10,7 +10,7 @@ class PercentIcon extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 5, 7, 5),
       decoration: BoxDecoration(
-        color: AppColors.green,
+        color: appColors.green,
         // color: color,
         borderRadius: BorderRadius.circular(20),
       ),

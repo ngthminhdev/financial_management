@@ -34,7 +34,7 @@ class BudgetChart extends StatelessWidget {
                 ),
                 dataLabelMapper: (ChartData data, _) => data.y.toString(),
                 pointColorMapper: (ChartData data, _) =>
-                    data.x == 'Spent' ? Colors.green : AppColors.strongOrange,
+                    data.x == 'Spent' ? Colors.green : appColors.strongOrange,
               )
             ],
             annotations: <CircularChartAnnotation>[
@@ -49,7 +49,7 @@ class BudgetChart extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Icon(
                       Remix.currency_fill,
-                      color: AppColors.strongYellow,
+                      color: appColors.strongYellow,
                       size: 32,
                       fill: 1,
                     ),
@@ -65,14 +65,14 @@ class BudgetChart extends StatelessWidget {
             Icon(
               Symbols.do_not_disturb_on,
               size: 14,
-              color: AppColors.strongOrange,
+              color: appColors.strongOrange,
             ),
             AutoSizeText(
               " 8,122,545 đ",
               maxLines: 1,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: AppColors.strongOrange,
+                color: appColors.strongOrange,
               ),
             ),
             // Text(

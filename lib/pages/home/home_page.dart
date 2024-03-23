@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-            color: AppColors.bg,
+            // color: appColors.bg,
             padding:
                 const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                 // const EdgeInsets.all(20),
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           "Tất cả",
                           style: TextStyle(
-                            color: AppColors.mediumPurple,
+                            color: appColors.mediumPurple,
                             fontSize: 16,
                           ),
                         ),
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           "Tất cả",
                           style: TextStyle(
-                            color: AppColors.mediumPurple,
+                            color: appColors.mediumPurple,
                             fontSize: 16,
                           ),
                         ),

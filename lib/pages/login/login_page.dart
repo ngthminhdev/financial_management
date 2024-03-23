@@ -5,6 +5,7 @@ import 'package:financial_management/widgets/button/button_constant.dart';
 import 'package:financial_management/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:page_transition/page_transition.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,7 +32,8 @@ class _LoginPageState extends State<LoginPage> {
         child: SingleChildScrollView(
           child: Container(
             height: MediaQuery.of(context).size.height * 0.85,
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 40),
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 40),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -44,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                         Text(
                           "Chào mừng trở lại!",
                           style: TextStyle(
-                            color: AppColors.purple,
+                            color: appColors.purple,
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                           ),
@@ -104,12 +106,14 @@ class _LoginPageState extends State<LoginPage> {
                     TextButton(
                         onPressed: () {
                           navigatorHelper.changeView(
-                              context, RouteNames.register);
+                              context, RouteNames.register,
+                              isReplaceName: true,
+                              type: PageTransitionType.leftToRight);
                         },
                         child: Text(
                           'Đăng ký',
                           style: TextStyle(
-                            color: AppColors.purple,
+                            color: appColors.purple,
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
                           ),

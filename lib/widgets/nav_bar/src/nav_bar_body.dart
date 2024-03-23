@@ -36,13 +36,13 @@ class NavBarBody extends StatelessWidget {
     return Container(
       clipBehavior: Clip.hardEdge,
       height: 60 + bottomPadding,
-      margin: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+      margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
       decoration: BoxDecoration(
         color: Colors.white.withAlpha(220),
-        border: Border.all(
-          color: Colors.white,
-          width: 2,
-        ),
+        // border: Border.all(
+        //   color: Colors.white,
+        //   width: 2,
+        // ),
         // boxShadow: [
         //   BoxShadow(
         //     color: Colors.black.withOpacity(.1),

@@ -25,6 +25,10 @@ dependencies:
   remixicon: ^1.2.0
   flutter_randomcolor: ^1.0.14
   animations: ^2.0.8
+  flutter_animate: ^4.5.0
+  flutter_masked_text2: ^0.9.1
+  flutter_launcher_icons: ^0.13.1
+  ionicons: ^0.2.2
 
 dev_dependencies:
   flutter_test:
@@ -32,6 +36,12 @@ dev_dependencies:
 
   flutter_lints: ^2.0.0
   syncfusion_flutter_core: 19.4.56
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo/logo.png"
+  # min_sdk_android: 21 # android min sdk min:16, default 21
 
 flutter:
 

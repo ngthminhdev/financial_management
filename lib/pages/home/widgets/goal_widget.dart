@@ -54,7 +54,7 @@ class _GoalWidgetState extends State<GoalWidget> {
                   children: [
                     CategoryIconWidget(
                         icon: Remix.macbook_line,
-                        color: AppColors.strongOrange),
+                        color: appColors.strongOrange),
                     SizedBox(
                       width: 10,
                     ),
@@ -86,14 +86,14 @@ class _GoalWidgetState extends State<GoalWidget> {
                 style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.grey),
+                    color: appColors.grey),
               ),
               Text(
                 DateHelper.format("2025-03-09T14:30:00"),
                 style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.grey),
+                    color: appColors.grey),
               )
             ],
           ),

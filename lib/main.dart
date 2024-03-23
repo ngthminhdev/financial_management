@@ -1,12 +1,13 @@
 import 'package:financial_management/core/color.dart';
 import 'package:financial_management/pages/analytics/analytics_page.dart';
+import 'package:financial_management/pages/budget/budget_page.dart';
 import 'package:financial_management/pages/home/home_page.dart';
 import 'package:financial_management/pages/more/more_page.dart';
 import 'package:financial_management/pages/plan/plan_page.dart';
 import 'package:financial_management/router/router.dart' as route;
 import 'package:financial_management/widgets/nav_bar/nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:remixicon/remixicon.dart';
 // import 'package:syncfusion_flutter_core/core.dart';
 
 void main() {
@@ -24,12 +25,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late PageController _pageController;
-  int selectedIndex = 0;
+  int selectedIndex = 2;
 
   List<Widget> _listOfPages = <Widget>[
     Container(alignment: Alignment.center, child: HomePage()),
     Container(alignment: Alignment.center, child: PlanPage()),
-    Container(alignment: Alignment.center, child: SizedBox()),
+    Container(alignment: Alignment.center, child: BudgetPage()),
     Container(alignment: Alignment.center, child: AnalyticsPage()),
     Container(alignment: Alignment.center, child: MorePage()),
   ];
@@ -66,7 +67,6 @@ class _MyAppState extends State<MyApp> {
       ),
       onGenerateRoute: route.Router.generateRoute,
       home: Scaffold(
-        /// body: RegisterPage(),
         body: Column(
           children: <Widget>[
             Expanded(child: PageView(
@@ -87,28 +87,28 @@ class _MyAppState extends State<MyApp> {
       onButtonPressed: _onNavbarChange,
       iconSize: 30,
       fontSize: 14,
-      activeColor: AppColors.purple,
-      inactiveColor: AppColors.grey,
+      activeColor: appColors.purple,
+      inactiveColor: appColors.grey,
       selectedIndex: selectedIndex,
       barItems: <BarItem>[
         BarItem(
-          icon: Symbols.home_filled,
+          icon: Remix.home_fill,
           title: 'Tổng quan',
         ),
         BarItem(
-          icon: Symbols.format_list_bulleted,
+          icon: Remix.list_check_3,
           title: 'Mục tiêu',
         ),
         BarItem(
-          icon: Symbols.add_circle,
-          title: '',
+          icon: Remix.add_circle_fill,
+          title: 'Ngân sách',
         ),
         BarItem(
-          icon: Symbols.finance,
+          icon: Remix.line_chart_line,
           title: 'Phân tích',
         ),
         BarItem(
-          icon: Symbols.browse,
+          icon: Remix.function_add_fill,
           title: 'Thêm...',
         ),
       ],

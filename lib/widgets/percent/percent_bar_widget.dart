@@ -27,14 +27,14 @@ class PercentBar extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.green),
+                    color: appColors.green),
               ),
               Text(
                 " / \$ ${NumberHelper.formatMoney(target)}",
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.charcoal),
+                    color: appColors.charcoal),
               )
             ],
           ),
@@ -54,7 +54,7 @@ class PercentBar extends StatelessWidget {
                     width: width,
                     child: Divider(
                       thickness: 8,
-                      color: AppColors.grey,
+                      color: appColors.grey,
                     ),
                   ),
                   Container(
@@ -66,7 +66,7 @@ class PercentBar extends StatelessWidget {
                     child: Divider(
                       endIndent: getCurrentPercentWidth(width),
                       thickness: 8,
-                      color: AppColors.green,
+                      color: appColors.green,
                     ),
                   )
                 ],

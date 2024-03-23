@@ -5,7 +5,10 @@ import 'package:flutter_randomcolor/flutter_randomcolor.dart';
 class CategoryIconWidget extends StatelessWidget {
   final IconData icon;
   final Color? color;
-  const CategoryIconWidget({required this.icon, this.color, super.key});
+  final double? width;
+  final double? height;
+  final double? iconSize;
+  const CategoryIconWidget({required this.icon, this.color, this.width, this.height = 40, this.iconSize = 24, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,8 @@ class CategoryIconWidget extends StatelessWidget {
     final Color randomColor = HexColor.fromHex(hex);
     final Color finalColor = color ?? randomColor;
     return Container(
-      width: (MediaQuery.of(context).size.width * 0.43 - 30) * 0.3,
+      width: width ?? (MediaQuery.of(context).size.width * 0.43 - 30) * 0.3,
+      height: height,
       decoration: BoxDecoration(
         color: finalColor,
         borderRadius: BorderRadius.circular(10),
@@ -22,6 +26,7 @@ class CategoryIconWidget extends StatelessWidget {
       child: Center(
         child: Icon(
           icon,
+          size: iconSize,
           color: Colors.white,
           fill: 1,
         ),

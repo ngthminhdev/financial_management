@@ -19,7 +19,7 @@ class FMCheckBox extends StatelessWidget {
     return Row(
       children: [
         Checkbox(
-            activeColor: AppColors.purple, value: value, onChanged: onChange),
+            activeColor: appColors.purple, value: value, onChanged: onChange),
         Text(text)
       ],
     );

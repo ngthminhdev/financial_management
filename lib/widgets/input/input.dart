@@ -37,9 +37,9 @@ class _FMInputState extends State<FMInput> {
   Color _getBorderColor(FMInputType type) {
     switch (type) {
       case FMInputType.normal:
-        return AppColors.purple;
+        return appColors.purple;
       case FMInputType.secondary:
-        return AppColors.grey;
+        return appColors.grey;
     }
   }
 
