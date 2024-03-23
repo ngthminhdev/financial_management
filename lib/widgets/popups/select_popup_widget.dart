@@ -57,25 +57,23 @@ class Popup {
                               maxHeight:
                                   MediaQuery.of(context).size.height * 0.5 - 52,
                             ),
-                            child: SingleChildScrollView(
-                              child: ListView.separated(
-                                shrinkWrap: true,
-                                itemCount: items.length,
-                                itemBuilder: (context, index) {
-                                  final Widget widget = items[index].widget;
-                                  final dynamic value = items[index].value;
-                                  return GestureDetector(
-                                    behavior: HitTestBehavior.translucent,
-                                    onTap: () {
-                                      print(value);
-                                      Navigator.of(context).pop(value);
-                                    },
-                                    child: widget,
-                                  );
-                                },
-                                separatorBuilder: (context, index) => Divider(
-                                    thickness: 1, color: appColors.grey),
-                              ),
+                            child: ListView.separated(
+                              shrinkWrap: true,
+                              itemCount: items.length,
+                              itemBuilder: (context, index) {
+                                final Widget widget = items[index].widget;
+                                final dynamic value = items[index].value;
+                                return GestureDetector(
+                                  behavior: HitTestBehavior.translucent,
+                                  onTap: () {
+                                    print(value);
+                                    Navigator.of(context).pop(value);
+                                  },
+                                  child: widget,
+                                );
+                              },
+                              separatorBuilder: (context, index) => Divider(
+                                  thickness: 1, color: appColors.grey),
                             ),
                           ),
                         ],
