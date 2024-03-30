@@ -8,6 +8,7 @@ class RowSelectWidget extends StatelessWidget {
   final Color? color;
   final String? value;
   final bool showValue;
+  final bool showArrow;
   final String title;
 
   const RowSelectWidget({
@@ -16,6 +17,7 @@ class RowSelectWidget extends StatelessWidget {
     required this.icon,
     this.color,
     this.showValue = false,
+    this.showArrow = true,
     this.value,
   });
 
@@ -42,6 +44,7 @@ class RowSelectWidget extends StatelessWidget {
           children: [
             if (showValue == true && value != null)
               Text(value!,
+              overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
@@ -49,7 +52,7 @@ class RowSelectWidget extends StatelessWidget {
             const SizedBox(
               width: 5,
             ),
-            Icon(Remix.arrow_right_s_line, color: appColors.charcoal)
+            if (showArrow) Icon(Remix.arrow_right_s_line, color: appColors.charcoal)
           ],
         )
       ],

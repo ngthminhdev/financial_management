@@ -29,6 +29,9 @@ dependencies:
   flutter_masked_text2: ^0.9.1
   flutter_launcher_icons: ^0.13.1
   ionicons: ^0.2.2
+  syncfusion_flutter_datepicker: ^19.4.56
+  animated_text_kit: ^4.2.2
+  syncfusion_localizations: ^19.4.56
 
 dev_dependencies:
   flutter_test:

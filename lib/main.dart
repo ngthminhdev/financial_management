@@ -8,12 +8,13 @@ import 'package:financial_management/router/router.dart' as route;
 import 'package:financial_management/widgets/nav_bar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:remixicon/remixicon.dart';
+import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 // import 'package:syncfusion_flutter_core/core.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // SyncfusionLicense.registerLicense("Ngo9BigBOggjHTQxAR8/V1NAaF1cXmhNYVJ0WmFZfVpgdV9FZVZRTGY/P1ZhSXxXdkZiWn5dc3NXTmJVWEU="); 
-  runApp(const MyApp());
+  // SyncfusionLicense.registerLicense("Ngo9BigBOggjHTQxAR8/V1NAaF1cXmhNYVJ0WmFZfVpgdV9FZVZRTGY/P1ZhSXxXdkZiWn5dc3NXTmJVWEU=");
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -66,10 +67,18 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       onGenerateRoute: route.Router.generateRoute,
+      // supportedLocales: const [
+      //   Locale('vi'),
+      //   Locale('en'),
+      // ],
+      // localizationsDelegates: const [
+      //   SfGlobalLocalizations.delegate,
+      // ],
       home: Scaffold(
         body: Column(
           children: <Widget>[
-            Expanded(child: PageView(
+            Expanded(
+                child: PageView(
               physics: const NeverScrollableScrollPhysics(),
               controller: _pageController,
               children: _listOfPages,

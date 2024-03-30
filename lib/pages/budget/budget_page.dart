@@ -168,9 +168,8 @@ class _BudgetPageState extends State<BudgetPage> {
                                     fontWeight: FontWeight.bold,
                                     color: appColors.darkPurple)),
                             callback: (dynamic value) {
-                              print('value ::: $value');
-                            },
-                            items: appConstant.budgetSelects);
+                          print('value ::: $value');
+                        }, items: appConstant.budgetSelects);
                       },
                       child: RowSelectWidget(
                         icon: Remix.price_tag_3_fill,
@@ -191,9 +190,8 @@ class _BudgetPageState extends State<BudgetPage> {
                                     fontWeight: FontWeight.bold,
                                     color: appColors.darkPurple)),
                             callback: (dynamic value) {
-                              print('value ::: $value');
-                            },
-                            items: appConstant.categorySelects);
+                          print('value ::: $value');
+                        }, items: appConstant.categorySelects);
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -232,56 +230,76 @@ class _BudgetPageState extends State<BudgetPage> {
                       ),
                     ),
                     Divider(thickness: 1, color: appColors.grey),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            CategoryIconWidget(
-                                icon: Remix.calendar_schedule_fill,
-                                color: appColors.orange),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text("Thời gian",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: appColors.charcoal)),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                                DateHelper.format(DateTime.now().toString(),
-                                    includeTime: true),
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                    color: appColors.charcoal)),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Icon(Remix.arrow_right_s_line,
-                                color: appColors.charcoal)
-                          ],
-                        )
-                      ],
+                    GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        appPopup.dateTimePickerPopup(
+                          context,
+                          title: Text("Chọn thời gian",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: appColors.darkPurple)),
+                          callback: (dynamic value) {
+                            print('value ::: $value');
+                          },
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              CategoryIconWidget(
+                                  icon: Remix.calendar_schedule_fill,
+                                  color: appColors.orange),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text("Thời gian",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: appColors.charcoal)),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                  DateHelper.format(
+                                    DateTime.now().toString(),
+                                  ),
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                      color: appColors.charcoal)),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Icon(Remix.arrow_right_s_line,
+                                  color: appColors.charcoal)
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                     Divider(thickness: 1, color: appColors.grey),
                     GestureDetector(
                       behavior: HitTestBehavior.translucent,
                       onTap: () {
-                        appPopup.textAreaPopup(context,
-                            title: Text("Chỉnh sửa ghi chú",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: appColors.darkPurple)),
-                            callback: (String? value) {
-                              print('value ::: $value');
-                            },);
+                        appPopup.textAreaPopup(
+                          context,
+                          title: Text("Chỉnh sửa ghi chú",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: appColors.darkPurple)),
+                          callback: (String? value) {
+                            print('value ::: $value');
+                          },
+                        );
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

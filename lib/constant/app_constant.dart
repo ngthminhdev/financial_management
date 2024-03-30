@@ -1,3 +1,4 @@
+import 'package:financial_management/core/color.dart';
 import 'package:financial_management/widgets/button/row_select.dart';
 import 'package:financial_management/widgets/popups/select_popup_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,20 +13,23 @@ class AppConstant {
         widget: RowSelectWidget(
           icon: Ionicons.wallet,
           title: "Mặc định",
+          color: appColors.strongYellow,
         ),
         value: 1),
     PopupItem(
         widget: RowSelectWidget(
-          icon: Remix.funds_fill,
-          title: "Đầu tư",
+          icon: Remix.hand_coin_fill,
+          title: "Tiết kiệm",
+          color: appColors.mediumPurple,
         ),
         value: 2),
     PopupItem(
         widget: RowSelectWidget(
-          icon: Remix.hand_coin_fill,
-          title: "Tiết kiệm",
+          icon: Remix.funds_fill,
+          title: "Đầu tư",
+          color: appColors.strongOrange,
         ),
-        value: 3)
+        value: 3),
   ];
 
   final List<Map<int, IconData>> categoryIconMap = [
