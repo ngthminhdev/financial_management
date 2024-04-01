@@ -1,4 +1,8 @@
+import 'package:animations/animations.dart';
 import 'package:financial_management/core/color.dart';
+import 'package:financial_management/helper/number_helper.dart';
+import 'package:financial_management/pages/analytics/budget_analytics_page.dart';
+import 'package:financial_management/widgets/budget_chart/double_column_chart.dart';
 import 'package:financial_management/widgets/button/row_select.dart';
 import 'package:financial_management/widgets/button/tab_button.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +39,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                 ),
               ]),
               const SizedBox(
-                height: 16,
+                height: 32,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -52,84 +56,165 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
               const SizedBox(
                 height: 32,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Remix.arrow_down_circle_fill,
+                            color: appColors.green,
+                            size: 20,
+                          ),
+                          Text(
+                            ' ${NumberHelper.formatMoney(13150000)}',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: appColors.green),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Remix.git_commit_fill,
+                            color: appColors.green,
+                          ),
+                          SizedBox(
+                            width: 6,
+                          ),
+                          Container(
+                              margin: EdgeInsets.only(bottom: 3),
+                              child: Text('Thu'))
+                        ],
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Remix.arrow_up_circle_fill,
+                            color: appColors.strongOrange,
+                            size: 20,
+                          ),
+                          Text(
+                            ' ${NumberHelper.formatMoney(8150000)}',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: appColors.strongOrange),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Remix.git_commit_fill,
+                            color: appColors.strongOrange,
+                          ),
+                          SizedBox(
+                            width: 6,
+                          ),
+                          Container(
+                              margin: EdgeInsets.only(bottom: 3),
+                              child: Text('Chi'))
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              DoubleColumnChart(),
+              const SizedBox(
+                height: 48,
+              ),
               Expanded(
                 child: Column(
                     mainAxisSize: MainAxisSize.max,
-                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(
-                                  0.2), // Màu và độ trong suốt của shadow
-                              spreadRadius: 2, // Độ lan rộng của shadow
-                              blurRadius: 5, // Độ mờ của shadow
-                              offset: const Offset(
-                                  0, 3), // Độ dịch chuyển của shadow (x, y)
+                      OpenContainer(
+                        transitionType: ContainerTransitionType.fade,
+                        transitionDuration: Duration(milliseconds: 500),
+                        openBuilder: (context, _) => BudgetAnalyticsPage(),
+                        closedBuilder: (context, VoidCallback openContainer) =>
+                            GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: openContainer,
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(
+                                      0.2), // Màu và độ trong suốt của shadow
+                                  spreadRadius: 2, // Độ lan rộng của shadow
+                                  blurRadius: 5, // Độ mờ của shadow
+                                  offset: const Offset(
+                                      0, 3), // Độ dịch chuyển của shadow (x, y)
+                                ),
+                              ],
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: RowSelectWidget(
-                          title: 'Ngân sách mặc định',
-                          icon: Ionicons.wallet,
-                          color: appColors.strongYellow,
+                            child: RowSelectWidget(
+                              title: 'Chi tiết khoản thu',
+                              icon: Remix.bank_card_fill,
+                              color: appColors.green,
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(
-                        height: 32,
+                        height: 16,
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(
-                                  0.2), // Màu và độ trong suốt của shadow
-                              spreadRadius: 2, // Độ lan rộng của shadow
-                              blurRadius: 5, // Độ mờ của shadow
-                              offset: const Offset(
-                                  0, 3), // Độ dịch chuyển của shadow (x, y)
+                      OpenContainer(
+                        transitionType: ContainerTransitionType.fade,
+                        transitionDuration: Duration(milliseconds: 500),
+                        openBuilder: (context, _) => BudgetAnalyticsPage(),
+                        closedBuilder: (context, VoidCallback openContainer) =>
+                            GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: openContainer,
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(
+                                      0.2), // Màu và độ trong suốt của shadow
+                                  spreadRadius: 2, // Độ lan rộng của shadow
+                                  blurRadius: 5, // Độ mờ của shadow
+                                  offset: const Offset(
+                                      0, 3), // Độ dịch chuyển của shadow (x, y)
+                                ),
+                              ],
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: RowSelectWidget(
-                          title: 'Tiết kiệm',
-                          icon: Remix.hand_coin_fill,
-                          color: appColors.mediumPurple,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 32,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(
-                                  0.2), // Màu và độ trong suốt của shadow
-                              spreadRadius: 2, // Độ lan rộng của shadow
-                              blurRadius: 5, // Độ mờ của shadow
-                              offset: const Offset(
-                                  0, 3), // Độ dịch chuyển của shadow (x, y)
+                            child: RowSelectWidget(
+                              title: 'Chi tiết khoản chi',
+                              icon: Remix.exchange_fill,
+                              color: appColors.strongOrange,
                             ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: RowSelectWidget(
-                          title: 'Đầu tư',
-                          icon: Remix.funds_fill,
-                          color: appColors.strongOrange,
+                          ),
                         ),
                       ),
-                    ]),
+                 ]),
               ),
             ],
           ),

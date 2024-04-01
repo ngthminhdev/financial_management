@@ -8,7 +8,6 @@ import 'package:financial_management/router/router.dart' as route;
 import 'package:financial_management/widgets/nav_bar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:remixicon/remixicon.dart';
-import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 // import 'package:syncfusion_flutter_core/core.dart';
 
 void main() {
@@ -26,7 +25,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late PageController _pageController;
-  int selectedIndex = 2;
+  int selectedIndex = 3;
 
   List<Widget> _listOfPages = <Widget>[
     Container(alignment: Alignment.center, child: HomePage()),

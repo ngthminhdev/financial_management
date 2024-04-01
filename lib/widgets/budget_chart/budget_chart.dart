@@ -25,6 +25,7 @@ class BudgetChart extends StatelessWidget {
             series: <CircularSeries>[
               DoughnutSeries<ChartData, String>(
                 dataSource: chartData,
+                cornerStyle: CornerStyle.bothCurve,
                 xValueMapper: (ChartData data, _) => data.x,
                 yValueMapper: (ChartData data, _) => data.y,
                 innerRadius: '80%',
@@ -34,7 +35,7 @@ class BudgetChart extends StatelessWidget {
                 ),
                 dataLabelMapper: (ChartData data, _) => data.y.toString(),
                 pointColorMapper: (ChartData data, _) =>
-                    data.x == 'Spent' ? Colors.green : appColors.strongOrange,
+                    data.x == 'Spent' ? appColors.green : appColors.strongOrange,
               )
             ],
             annotations: <CircularChartAnnotation>[
@@ -98,7 +99,7 @@ class BudgetChart extends StatelessWidget {
               maxLines: 1,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.green,
+                color: appColors.green,
               ),
             ),
             // Text(

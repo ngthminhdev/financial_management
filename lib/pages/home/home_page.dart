@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Mục tiêu của bạn",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,

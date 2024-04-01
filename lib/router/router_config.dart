@@ -1,4 +1,5 @@
 import 'package:financial_management/pages/analytics/analytics_page.dart';
+import 'package:financial_management/pages/analytics/budget_analytics_page.dart';
 import 'package:financial_management/pages/budget/budget_page.dart';
 import 'package:financial_management/pages/home/home_page.dart';
 import 'package:financial_management/pages/login/login_page.dart';
@@ -16,26 +17,32 @@ class RouteNames {
 
   static const String register = 'Register';
   static const String login = 'Login';
+
+  static const String budgetAnalytics = 'BudgetAnalytics';
 }
 
 class RouteCreator {
   static Map<String, dynamic> routes = {
-    // home
+        RouteNames.register: BaseRoute(RouteNames.register, 'Register',
+        view: ({settings, params}) => RegisterPage()),
+    RouteNames.login: BaseRoute(RouteNames.login, 'Login',
+        view: ({settings, params}) => LoginPage()),
+
     RouteNames.home: BaseRoute(RouteNames.home, 'Home',
         view: ({settings, params}) => HomePage()),
     RouteNames.plan: BaseRoute(RouteNames.plan, 'Plan',
         view: ({settings, params}) => PlanPage()),
     RouteNames.budget: BaseRoute(RouteNames.plan, 'Budget',
         view: ({settings, params}) => BudgetPage()),
+
+    RouteNames.budgetAnalytics: BaseRoute(RouteNames.budgetAnalytics, 'BudgetAnalytics',
+        view: ({settings, params}) => BudgetAnalyticsPage()),
     RouteNames.analytics: BaseRoute(RouteNames.analytics, 'Analytics',
         view: ({settings, params}) => AnalyticsPage()),
     RouteNames.more: BaseRoute(RouteNames.more, 'More',
         view: ({settings, params}) => MorePage()),
 
-    RouteNames.register: BaseRoute(RouteNames.register, 'Register',
-        view: ({settings, params}) => RegisterPage()),
-    RouteNames.login: BaseRoute(RouteNames.login, 'Login',
-        view: ({settings, params}) => LoginPage()),
+
   };
 }
 
