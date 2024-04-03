@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 
 class FMTabButton extends StatefulWidget {
   final List<String> tabTitles;
+  final int? initialIndex;
   final Function(int)? onTabChange;
 
-  const FMTabButton({required this.tabTitles, this.onTabChange, super.key});
+  const FMTabButton(
+      {required this.tabTitles,
+      this.initialIndex = 0,
+      this.onTabChange,
+      super.key});
 
   @override
   State<FMTabButton> createState() => _FMTabButtonState();
@@ -13,6 +18,11 @@ class FMTabButton extends StatefulWidget {
 
 class _FMTabButtonState extends State<FMTabButton> {
   int _index = 0;
+  @override
+  void initState() {
+    _index = widget.initialIndex ?? 0;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

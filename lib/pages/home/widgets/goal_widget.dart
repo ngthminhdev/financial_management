@@ -116,7 +116,8 @@ class _GoalWidgetState extends State<GoalWidget> {
                   color: Colors.white,
                 ),
               ),
-              onPressed: openContainer
+              // onPressed: openContainer
+              onPressed: () {}
             ),
           )
         ],

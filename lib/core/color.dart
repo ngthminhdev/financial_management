@@ -39,6 +39,9 @@ class AppColors {
   final green = HexColor.fromHex("#3fd6b1");
   final strongYellow = HexColor.fromHex('#f9da89');
 
+  final lightPink = HexColor.fromHex('#f3edff');
+  final darkCharcoal = HexColor.fromHex('#58535f');
+
   static Color randomColor() {
     final String hex = RandomColor.getColor(
         Options(format: Format.hex, luminosity: Luminosity.bright));

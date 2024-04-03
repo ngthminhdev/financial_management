@@ -38,7 +38,7 @@ class CategorySpendChart extends StatelessWidget {
       // height: 800,
       // width: 1000,
       // color: appColors.lightPurple,
-      padding: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -86,6 +86,7 @@ class CategorySpendChart extends StatelessWidget {
               xValueMapper: (CategoryModel data, _) => data.name,
               yValueMapper: (CategoryModel data, _) => data.amountUsed,
               dataLabelMapper: (CategoryModel data, _) =>
+                    // data.name,
                   NumberHelper.formatMoney(data.amountUsed!),
               pointColorMapper: (CategoryModel data, _) => data.color,
               dataLabelSettings: const DataLabelSettings(
@@ -156,9 +157,9 @@ class CategorySpendChart extends StatelessWidget {
             overflowMode: LegendItemOverflowMode.wrap,
             orientation: LegendItemOrientation.vertical,
             alignment: ChartAlignment.near,
-            position: LegendPosition.bottom, // Vị trí của hướng dẫn (phải)
-            textStyle: TextStyle(
-                fontSize: 13), // Phông chữ của văn bản trong hướng dẫn
+            position: LegendPosition.bottom,
+            textStyle: const TextStyle(
+                fontSize: 13),
           ),
         ),
       ),

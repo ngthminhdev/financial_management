@@ -32,25 +32,25 @@ class AppConstant {
         value: 3),
   ];
 
-  final List<Map<int, IconData>> categoryIconMap = [
-    {0: Remix.home_3_fill}, // Nhà cửa
-    {1: Remix.restaurant_fill}, // Đồ đi chợ nấu ăn
-    {2: Ionicons.fast_food}, // Các bữa ăn uống bên ngoài
-    {3: Remix.drinks_2_fill}, // Uống các thứ (cafe, trà sữa..)
-    {4: Remix.motorbike_fill}, // Xe cộ, đi lại
-    {5: Remix.capsule_fill}, // Đau ốm
-    {6: Remix.beer_fill}, // Đám tiệc
-    {7: Remix.exchange_dollar_line}, // Trả nợ - Trả góp các thứ
-    {8: Remix.shake_hands_fill}, // Các mối quan hệ
-    {9: Remix.book_2_fill}, // Học tập
-    {10: Remix.bank_fill}, // Tiết kiệm
-    {11: Remix.smartphone_line}, // Thiết bị - điện tử
-    {12: Remix.shopping_bag_4_fill}, // Mua sắm
-    {13: Remix.tools_fill}, // Tools
-    {14: Remix.cash_line}, // Tools
-    {15: Remix.funds_fill}, // Tools
-    {16: Remix.more_fill}, // Khác
-  ];
+  final Map<int, IconData> categoryIconMap = {
+    0: Remix.home_3_fill, // Nhà cửa
+    1: Remix.restaurant_fill, // Đồ đi chợ nấu ăn
+    2: Ionicons.fast_food, // Các bữa ăn uống bên ngoài
+    3: Remix.drinks_2_fill, // Uống các thứ (cafe, trà sữa..)
+    4: Remix.motorbike_fill, // Xe cộ, đi lại
+    5: Remix.capsule_fill, // Đau ốm
+    6: Remix.beer_fill, // Đám tiệc
+    7: Remix.exchange_dollar_line, // Trả nợ - Trả góp các thứ
+    8: Remix.shake_hands_fill, // Các mối quan hệ
+    9: Remix.book_2_fill, // Học tập
+    10: Remix.bank_fill, // Tiết kiệm
+    11: Remix.smartphone_line, // Thiết bị - điện tử
+    12: Remix.shopping_bag_4_fill, // Mua sắm
+    13: Remix.tools_fill, // Tools
+    14: Remix.cash_line, // Tools
+    15: Remix.funds_fill, // Tools
+    16: Remix.more_fill, // Khác
+  };
 
   List<PopupItem> categorySelects = [
     PopupItem(

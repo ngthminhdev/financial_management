@@ -25,7 +25,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late PageController _pageController;
-  int selectedIndex = 3;
+  int selectedIndex = 0;
 
   List<Widget> _listOfPages = <Widget>[
     Container(alignment: Alignment.center, child: HomePage()),
@@ -100,19 +100,19 @@ class _MyAppState extends State<MyApp> {
       selectedIndex: selectedIndex,
       barItems: <BarItem>[
         BarItem(
-          icon: Remix.home_fill,
+          icon: Remix.home_3_fill,
           title: 'Tổng quan',
         ),
         BarItem(
-          icon: Remix.list_check_3,
+          icon: Remix.equalizer_fill,
           title: 'Mục tiêu',
         ),
         BarItem(
-          icon: Remix.add_circle_fill,
+          icon: Remix.money_dollar_circle_fill,
           title: 'Ngân sách',
         ),
         BarItem(
-          icon: Remix.line_chart_line,
+          icon: Remix.pie_chart_2_fill,
           title: 'Phân tích',
         ),
         BarItem(

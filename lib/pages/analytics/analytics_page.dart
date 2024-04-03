@@ -45,6 +45,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FMTabButton(
+                    initialIndex: 1,
                     tabTitles: const ['Ngày', 'Tháng', 'Năm'],
                     onTabChange: (int tab) {
                       print(
@@ -154,10 +155,12 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                         closedBuilder: (context, VoidCallback openContainer) =>
                             GestureDetector(
                           behavior: HitTestBehavior.translucent,
-                          onTap: openContainer,
+                          // onTap: openContainer,
+                          onTap: () {},
                           child: Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(
@@ -169,7 +172,6 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                                 ),
                               ],
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
                             ),
                             child: RowSelectWidget(
                               title: 'Chi tiết khoản thu',
