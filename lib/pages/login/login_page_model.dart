@@ -19,7 +19,7 @@ class LoginPageModel extends BasePageModel {
   LoginPageModel(BuildContext context) : super(context);
 
   void toggleSaveLogin(bool? value) {
-    isSaveYourLogin = true;
+    isSaveYourLogin = !isSaveYourLogin;
   }
 
   Future<void> login() async {
