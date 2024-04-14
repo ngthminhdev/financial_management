@@ -1,59 +1,27 @@
-import 'package:financial_management/core/color.dart';
-import 'package:financial_management/pages/analytics/analytics_page.dart';
-import 'package:financial_management/pages/budget/budget_page.dart';
-import 'package:financial_management/pages/home/home_page.dart';
-import 'package:financial_management/pages/more/more_page.dart';
-import 'package:financial_management/pages/plan/plan_page.dart';
+import 'package:financial_management/pages/introduction/introduction_page.dart';
+import 'package:financial_management/pages/login/login_page.dart';
+import 'package:financial_management/pages/main/main_page.dart';
 import 'package:financial_management/router/router.dart' as route;
-import 'package:financial_management/widgets/nav_bar/nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:remixicon/remixicon.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:syncfusion_flutter_core/core.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  var isSaveLoggedIn = prefs.getBool('isSaveLoggedIn') ?? false;
+  var isAppInit = prefs.getBool('isAppInit') ?? false;
   // SyncfusionLicense.registerLicense("Ngo9BigBOggjHTQxAR8/V1NAaF1cXmhNYVJ0WmFZfVpgdV9FZVZRTGY/P1ZhSXxXdkZiWn5dc3NXTmJVWEU=");
-  runApp(MyApp());
+  runApp(MyApp(
+    isAppInit: isAppInit,
+    isSaveLoggedIn: isSaveLoggedIn,
+  ));
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  late PageController _pageController;
-  int selectedIndex = 0;
-
-  List<Widget> _listOfPages = <Widget>[
-    Container(alignment: Alignment.center, child: HomePage()),
-    Container(alignment: Alignment.center, child: PlanPage()),
-    Container(alignment: Alignment.center, child: BudgetPage()),
-    Container(alignment: Alignment.center, child: AnalyticsPage()),
-    Container(alignment: Alignment.center, child: MorePage()),
-  ];
-
-  void _onNavbarChange(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-    _pageController.animateToPage(selectedIndex,
-        duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(initialPage: selectedIndex);
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
+class MyApp extends StatelessWidget {
+  final bool isSaveLoggedIn;
+  final bool isAppInit;
+  MyApp({super.key, required this.isAppInit, required this.isSaveLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -66,60 +34,13 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       onGenerateRoute: route.Router.generateRoute,
-      // supportedLocales: const [
-      //   Locale('vi'),
-      //   Locale('en'),
-      // ],
-      // localizationsDelegates: const [
-      //   SfGlobalLocalizations.delegate,
-      // ],
       home: Scaffold(
-        body: Column(
-          children: <Widget>[
-            Expanded(
-                child: PageView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: _pageController,
-              children: _listOfPages,
-            ))
-          ],
-        ),
-        bottomNavigationBar: _buildNavbar(),
+        body: isSaveLoggedIn
+            ? MainPage()
+            : isAppInit
+                ? LoginPage()
+                : IntroductionPage(),
       ),
-    );
-  }
-
-  NavBar _buildNavbar() {
-    return NavBar(
-      backgroundColor: Colors.white,
-      onButtonPressed: _onNavbarChange,
-      iconSize: 30,
-      fontSize: 14,
-      activeColor: appColors.purple,
-      inactiveColor: appColors.grey,
-      selectedIndex: selectedIndex,
-      barItems: <BarItem>[
-        BarItem(
-          icon: Remix.home_3_fill,
-          title: 'Tổng quan',
-        ),
-        BarItem(
-          icon: Remix.equalizer_fill,
-          title: 'Mục tiêu',
-        ),
-        BarItem(
-          icon: Remix.money_dollar_circle_fill,
-          title: 'Ngân sách',
-        ),
-        BarItem(
-          icon: Remix.pie_chart_2_fill,
-          title: 'Phân tích',
-        ),
-        BarItem(
-          icon: Remix.function_add_fill,
-          title: 'Thêm...',
-        ),
-      ],
     );
   }
 }

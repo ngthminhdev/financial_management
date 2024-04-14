@@ -43,7 +43,10 @@ class _FMInputState extends State<FMInput> {
     }
   }
 
-  bool _validator(String text, Function(String)? internalValidator) {
+  bool _validator(String? text, Function(String)? internalValidator) {
+    if (text == null || text.isEmpty) {
+      return true;
+    } 
     if (widget.validator == null) {
       return true;
     }

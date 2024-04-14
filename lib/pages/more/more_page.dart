@@ -302,8 +302,8 @@ class _MorePageState extends State<MorePage> {
                           color: Colors.white,
                         ),
                         child: RowSelectWidget(
-                          title: 'Báo lỗi ứng dụng',
-                          icon: Remix.error_warning_fill,
+                          title: 'Đăng xuất',
+                          icon: Remix.logout_box_fill,
                           // color: appColors.green,
                         ),
                       ),

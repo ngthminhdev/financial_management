@@ -32,6 +32,12 @@ dependencies:
   syncfusion_flutter_datepicker: ^19.4.56
   animated_text_kit: ^4.2.2
   syncfusion_localizations: ^19.4.56
+  introduction_screen: ^3.1.12
+  dots_indicator: ^2.1.2
+  shared_preferences: ^2.2.2
+  provider: ^6.1.2
+  http: ^1.1.0
+  loading_animation_widget: ^1.2.1
 
 dev_dependencies:
   flutter_test:

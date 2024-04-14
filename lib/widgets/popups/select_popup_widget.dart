@@ -2,6 +2,7 @@ import 'package:financial_management/core/color.dart';
 import 'package:financial_management/widgets/button/button.dart';
 import 'package:financial_management/widgets/button/button_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -14,6 +15,8 @@ class PopupItem {
     required this.value,
   });
 }
+
+enum PopupType { success, error, warning }
 
 class Popup {
   static final _instance = Popup._internal();
@@ -29,72 +32,78 @@ class Popup {
       pageBuilder: (context, animation, secondaryAnimation) {
         return StatefulBuilder(builder: (context, setState) {
           return AnimatedBuilder(
-            animation: animation,
-            builder: (context, child) {
-              return Transform.scale(
-                scale: animation.value,
-                child: Scaffold(
-                  backgroundColor: Colors.transparent,
-                  body: Center(
-                      child: Container(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          padding: const EdgeInsets.all(10),
-                          constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width * 0.8,
-                            maxHeight: MediaQuery.of(context).size.height * 0.5,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Stack(children: [
-                            Positioned(
-                                top: -5,
-                                right: -5,
-                                child: IconButton(
-                                  icon: const Icon(Remix.close_line),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                )),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                if (title != null) title,
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: title != null ? 15 : 0),
-                                  constraints: BoxConstraints(
-                                    maxHeight:
-                                        MediaQuery.of(context).size.height * 0.5 - 52,
-                                  ),
-                                  child: ListView.separated(
-                                    shrinkWrap: true,
-                                    itemCount: items.length,
-                                    itemBuilder: (context, index) {
-                                      final Widget widget = items[index].widget;
-                                      final dynamic value = items[index].value;
-                                      return GestureDetector(
-                                        behavior: HitTestBehavior.translucent,
-                                        onTap: () {
-                                          print(value);
-                                          Navigator.of(context).pop(value);
-                                        },
-                                        child: widget,
-                                      );
-                                    },
-                                    separatorBuilder: (context, index) =>
-                                        Divider(thickness: 1, color: appColors.grey),
-                                  ),
-                                ),
-                              ],
+              animation: animation,
+              builder: (context, child) {
+                return Transform.scale(
+                  scale: animation.value,
+                  child: Scaffold(
+                    backgroundColor: Colors.transparent,
+                    body: Center(
+                        child: Container(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            padding: const EdgeInsets.all(10),
+                            constraints: BoxConstraints(
+                              maxWidth: MediaQuery.of(context).size.width * 0.8,
+                              maxHeight:
+                                  MediaQuery.of(context).size.height * 0.5,
                             ),
-                          ]))),
-                ),
-              );
-            }
-          );
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Stack(children: [
+                              Positioned(
+                                  top: -5,
+                                  right: -5,
+                                  child: IconButton(
+                                    icon: const Icon(Remix.close_line),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  )),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  if (title != null) title,
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: title != null ? 15 : 0),
+                                    constraints: BoxConstraints(
+                                      maxHeight:
+                                          MediaQuery.of(context).size.height *
+                                                  0.5 -
+                                              52,
+                                    ),
+                                    child: ListView.separated(
+                                      shrinkWrap: true,
+                                      itemCount: items.length,
+                                      itemBuilder: (context, index) {
+                                        final Widget widget =
+                                            items[index].widget;
+                                        final dynamic value =
+                                            items[index].value;
+                                        return GestureDetector(
+                                          behavior: HitTestBehavior.translucent,
+                                          onTap: () {
+                                            print(value);
+                                            Navigator.of(context).pop(value);
+                                          },
+                                          child: widget,
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) =>
+                                          Divider(
+                                              thickness: 1,
+                                              color: appColors.grey),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ]))),
+                  ),
+                );
+              });
         });
       },
     );
@@ -151,7 +160,8 @@ class Popup {
                                 Container(
                                   constraints: BoxConstraints(
                                     maxHeight:
-                                        MediaQuery.of(context).size.height * 0.5 -
+                                        MediaQuery.of(context).size.height *
+                                                0.5 -
                                             52,
                                   ),
                                   child: TextFormField(
@@ -310,6 +320,147 @@ class Popup {
       },
     );
     callback(value);
+  }
+
+  void messagePopup(BuildContext context,
+      {String? message, PopupType? type, Function()? callback}) async {
+    PopupType pType = type ?? PopupType.success;
+    Color borderColor = appColors.green;
+    switch (pType) {
+      case PopupType.success:
+        borderColor = appColors.green;
+        break;
+      case PopupType.error:
+        borderColor = appColors.red;
+        break;
+      case PopupType.warning:
+        borderColor = appColors.orange;
+        break;
+    }
+
+    await showGeneralDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AnimatedBuilder(
+              animation: animation,
+              builder: (context, child) {
+                return Transform.scale(
+                  scale: animation.value,
+                  child: Scaffold(
+                    backgroundColor: Colors.transparent,
+                    body: Center(
+                        child: Container(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.7,
+                        maxHeight: MediaQuery.of(context).size.height * 0.4,
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: borderColor,
+                            style: BorderStyle.solid,
+                            width: 2,
+                          )),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Text(
+                              'Thông báo',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: appColors.darkCharcoal,
+                              ),
+                            ),
+                          ),
+                          Divider(
+                            thickness: 1,
+                            color: appColors.grey,
+                          ),
+                          message != null
+                              ? Container(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10, bottom: 10),
+                                  child: Text(
+                                    message,
+                                    softWrap: true,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: appColors.charcoal,
+                                    ),
+                                  ),
+                                )
+                              : Container(),
+                          Container(
+                            padding: const EdgeInsets.only(
+                              left: 80,
+                              right: 80,
+                            ),
+                            child: FMButton(
+                              text: 'Đóng',
+                              size: FMButtonSize.small,
+                              type: FMButtonType.secondary,
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                // callback!();
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    )),
+                  ),
+                );
+              });
+        });
+      },
+    );
+    if (callback != null && callback is Function) {
+      callback();
+    }
+  }
+
+  void loading(BuildContext context,
+      {required bool busy,
+      required GlobalKey<NavigatorState> dialogKey}) async {
+    if (busy) {
+      await showGeneralDialog(
+        context: dialogKey.currentContext ?? context,
+        barrierColor: Colors.black45,
+        // transitionDuration: const Duration(milliseconds: 300),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return StatefulBuilder(builder: (context, setState) {
+            return WillPopScope(
+              onWillPop: () async {
+                return false;
+              },
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                body: Center(
+                    child: LoadingAnimationWidget.discreteCircle(
+                        size: 50,
+                        color: appColors.purple,
+                        secondRingColor: appColors.mediumPurple,
+                        thirdRingColor: appColors.lightPurple)),
+              ),
+            );
+          });
+        },
+      );
+    } else {
+      dialogKey.currentState?.pop();
+      Navigator.of(dialogKey.currentContext ?? context).pop();
+    }
   }
 
   factory Popup() {

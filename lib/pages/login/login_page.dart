@@ -1,5 +1,6 @@
 import 'package:financial_management/core/color.dart';
 import 'package:financial_management/helper/navigator_helper.dart';
+import 'package:financial_management/pages/login/login_page_model.dart';
 import 'package:financial_management/router/router_config.dart';
 import 'package:financial_management/widgets/button/button_constant.dart';
 import 'package:financial_management/widgets/widgets.dart';
@@ -15,19 +16,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool isSaveYourLogin = false;
-
-  void toggleSaveLogin(bool? value) {
-    setState(() {
-      isSaveYourLogin = !isSaveYourLogin;
-    });
+  late LoginPageModel pageModel;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    pageModel = LoginPageModel(context);
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: pageModel.dialogKey,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -68,13 +67,13 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     FMInput(
-                      controller: usernameController,
+                      controller: pageModel.accountNameController,
                       label: 'Tài khoản',
-                      icon: Symbols.account_child,
+                      icon: Symbols.account_circle,
                     ),
                     FMInput(
                       isObscured: true,
-                      controller: passwordController,
+                      controller: pageModel.passwordController,
                       label: 'Mật khẩu',
                       icon: Symbols.password,
                     ),
@@ -83,15 +82,25 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         FMCheckBox(
                             text: "Ghi nhớ đăng nhập?",
-                            value: isSaveYourLogin,
+                            value: pageModel.isSaveYourLogin,
                             onChange: (bool? value) {
-                              toggleSaveLogin(value);
+                              setState(() {
+                                pageModel.toggleSaveLogin(value);
+                              });
+                                print('${pageModel.isSaveYourLogin}');
+                                print('$value');
                             }),
                       ],
                     )
                   ],
                 ),
-                FMButton(text: 'Đăng nhập', size: FMButtonSize.max),
+                FMButton(
+                  text: 'Đăng nhập',
+                  size: FMButtonSize.max,
+                  onPressed: () async {
+                    pageModel.login();
+                  },
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
