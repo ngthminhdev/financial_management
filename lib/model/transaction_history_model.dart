@@ -2,12 +2,14 @@ class TransactionHistoryModel {
   final String? id;
   final String? goatId;
   final String? walletId;
-  final int? categoryId;
+  final String? categoryId;
   final String? categoryName;
   final double? amount;
   final double? balanceFrom;
   final double? balanceTo;
   final String? note;
+  final int? type;
+  final int? icon;
   final String? createdAt;
   final String? modifiedAt;
 
@@ -21,6 +23,8 @@ class TransactionHistoryModel {
     this.balanceFrom,
     this.balanceTo,
     this.note,
+    this.type,
+    this.icon,
     this.createdAt,
     this.modifiedAt,
   });
@@ -31,10 +35,13 @@ class TransactionHistoryModel {
       goatId: json['goat_id'],
       walletId: json['wallet_id'],
       categoryId: json['category_id'],
+      categoryName: json['category_name'],
       amount: double.tryParse(json['amount']) ?? 0.0,
       balanceFrom: double.tryParse(json['balance_from']) ?? 0.0,
       balanceTo: double.tryParse(json['balance_to']) ?? 0.0,
       note: json['note'] ?? '',
+      type: json['type'] ?? 1,
+      icon: json['icon'] ?? 0,
       createdAt: json['created_at'],
       modifiedAt: json['modified_at'],
     );

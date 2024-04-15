@@ -7,8 +7,8 @@ import 'package:remixicon/remixicon.dart';
 
 class AppConstant {
   static final AppConstant _instance = AppConstant._internal();
-  // final String apiHost = '192.168.0.73:2002';
-  final String apiHost = '54.179.222.129:2002';
+  final String apiHost = '192.168.0.73:2002';
+  // final String apiHost = '54.179.222.129:2002';
 
   final List<PopupItem> budgetSelects = [
     PopupItem(
@@ -54,92 +54,6 @@ class AppConstant {
     16: Icons.pets // Pet
   };
 
-  List<PopupItem> categorySelects = [
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.home_3_fill,
-          title: "Nhà cửa",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.restaurant_fill,
-          title: "Đồ đi chợ nấu ăn",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Ionicons.fast_food,
-          title: "Các bữa ăn uống bên ngoài",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.drinks_2_fill,
-          title: " Uống các thứ (cafe, trà sữa..)",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.motorbike_fill,
-          title: "Xe cộ, đi lại",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.capsule_fill,
-          title: "Đau ốm",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.beer_fill,
-          title: "Đám tiệc",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.exchange_dollar_line,
-          title: "Trả nợ - Trả góp các thứ",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.shake_hands_fill,
-          title: "Các mối quan hệ",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.book_2_fill,
-          title: "Học tập",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.smartphone_line,
-          title: "Thiết bị - điện tử",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.shopping_bag_4_fill,
-          title: "Mua sắm",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.tools_fill,
-          title: "Tools",
-        ),
-        value: 0),
-    PopupItem(
-        widget: RowSelectWidget(
-          icon: Remix.more_fill,
-          title: "Khác",
-        ),
-        value: 0),
-  ];
 
   factory AppConstant() {
     return _instance;

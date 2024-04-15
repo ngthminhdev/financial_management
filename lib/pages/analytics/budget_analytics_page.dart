@@ -2,7 +2,7 @@ import 'package:financial_management/constant/app_constant.dart';
 import 'package:financial_management/core/color.dart';
 import 'package:financial_management/helper/date_helper.dart';
 import 'package:financial_management/helper/number_helper.dart';
-import 'package:financial_management/model/transaction_history_model.dart';
+import 'package:financial_management/pages/analytics/budget_analytics_page_model.dart';
 import 'package:financial_management/widgets/budget_chart/category_icon_widget.dart';
 import 'package:financial_management/widgets/category_spent_chart/category_spent_chart.dart';
 import 'package:flutter/material.dart';
@@ -16,116 +16,15 @@ class BudgetAnalyticsPage extends StatefulWidget {
 }
 
 class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage> {
-  List<TransactionHistoryModel> listTransactions = [
-    TransactionHistoryModel(
-        id: '1',
-        createdAt: DateTime.now().toIso8601String(),
-        amount: 15000,
-        balanceFrom: 500000,
-        balanceTo: 485000,
-        note: 'Cafe sáng',
-        categoryName: 'Uống các thứ (cafe, trà sữa..)',
-        categoryId: 3),
-    TransactionHistoryModel(
-        id: '2',
-        createdAt: DateTime.now().toIso8601String(),
-        amount: 200000,
-        balanceFrom: 485000,
-        balanceTo: 465000,
-        note: 'Ăn sáng',
-        categoryName: 'Các bữa ăn uống bên ngoài',
-        categoryId: 2),
-    TransactionHistoryModel(
-        id: '3',
-        createdAt: DateTime.now().toIso8601String(),
-        amount: 32000,
-        balanceFrom: 465000,
-        balanceTo: 433000,
-        note: 'Pin bàn phím',
-        categoryName: 'Thiết bị - điện tử',
-        categoryId: 11),
-    TransactionHistoryModel(
-        id: '1',
-        createdAt: DateTime.now().toIso8601String(),
-        amount: 55000,
-        balanceFrom: 433000,
-        balanceTo: 378000,
-        note: 'Ăn tối bánh cuốn + phở',
-        categoryName: 'Các bữa ăn uống bên ngoài',
-        categoryId: 2),
-    TransactionHistoryModel(
-        id: '1',
-        createdAt: DateTime.now().toIso8601String(),
-        amount: 20000,
-        balanceFrom: 500000,
-        balanceTo: 485000,
-        note: 'Trà sữa',
-        categoryName: 'Uống các thứ (cafe, trà sữa..)',
-        categoryId: 3),
-    TransactionHistoryModel(
-        id: '1',
-        createdAt: DateTime.now().toIso8601String(),
-        amount: 313000,
-        balanceFrom: 485000,
-        balanceTo: 485000,
-        note: '',
-        categoryName: 'Đồ đi chợ nấu ăn',
-        categoryId: 1),
-    TransactionHistoryModel(
-        id: '1',
-        createdAt: DateTime.now().toIso8601String(),
-        amount: 16000,
-        balanceFrom: 485000,
-        balanceTo: 485000,
-        note: 'Mua sách',
-        categoryName: 'Học tập',
-        categoryId: 9),
-    TransactionHistoryModel(
-        id: '3',
-        createdAt: DateTime.now().toIso8601String(),
-        amount: 32000,
-        balanceFrom: 465000,
-        balanceTo: 433000,
-        note: 'Pin bàn phím',
-        categoryName: 'Thiết bị - điện tử',
-        categoryId: 11),
-    TransactionHistoryModel(
-        id: '1',
-        createdAt: DateTime.now().toIso8601String(),
-        amount: 55000,
-        balanceFrom: 433000,
-        balanceTo: 378000,
-        note: 'Ăn tối bánh cuốn + phở',
-        categoryName: 'Các bữa ăn uống bên ngoài',
-        categoryId: 2),
-    TransactionHistoryModel(
-        id: '1',
-        createdAt: DateTime.now().toIso8601String(),
-        amount: 20000,
-        balanceFrom: 500000,
-        balanceTo: 485000,
-        note: 'Trà sữa',
-        categoryName: 'Các bữa ăn uống bên ngoài',
-        categoryId: 3),
-    TransactionHistoryModel(
-        id: '1',
-        createdAt: DateTime.now().toIso8601String(),
-        amount: 313000,
-        balanceFrom: 485000,
-        balanceTo: 485000,
-        note: '',
-        categoryName: 'Đồ đi chợ nấu ăn',
-        categoryId: 1),
-    TransactionHistoryModel(
-        id: '1',
-        createdAt: DateTime.now().toIso8601String(),
-        amount: 16000,
-        balanceFrom: 485000,
-        balanceTo: 485000,
-        note: 'Mua sách',
-        categoryName: 'Học tập',
-        categoryId: 9),
-  ];
+  late BudgetAnalyticPageModel pageModel;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    pageModel = BudgetAnalyticPageModel(context);
+    pageModel.initData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +50,7 @@ class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage> {
               const SizedBox(
                 height: 32,
               ),
-              CategorySpendChart(),
+              const CategorySpendChart(),
               const SizedBox(
                 height: 22,
               ),
@@ -176,7 +75,7 @@ class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage> {
                     ),
                   ],
                 ),
-                IconButton(onPressed: () {}, icon: Icon(Remix.sort_asc))
+                IconButton(onPressed: () {}, icon: const Icon(Remix.sort_asc))
               ]),
               const SizedBox(
                 height: 16,
@@ -191,23 +90,23 @@ class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage> {
                   }
                   // List<TransactionHistoryModel>? list = snapshot.data as dynamic;
                   return ListView.separated(
-                      itemCount: listTransactions.length,
+                      itemCount: pageModel.listTransactions.length,
                       itemBuilder: (context, index) {
-                        final transaction = listTransactions[index];
+                        final transaction = pageModel.listTransactions[index];
                         return Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Row(
                                   children: [
                                     CategoryIconWidget(
-                                      icon: appConstant.categoryIconMap[
-                                          transaction.categoryId]!,
+                                      icon: appConstant
+                                          .categoryIconMap[transaction.icon]!,
                                       color: appColors.lightPink,
                                       iconColor: appColors.darkCharcoal,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 12,
                                     ),
                                     Column(
@@ -254,7 +153,7 @@ class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage> {
                                           // mainAxisAlignment: MainAxisAlignment.end,
                                           children: [
                                             Text(
-                                              '-${NumberHelper.formatMoney(transaction.amount!)}',
+                                              NumberHelper.formatMoney(transaction.amount!),
                                               style: TextStyle(
                                                 color: appColors.strongOrange,
                                                 fontWeight: FontWeight.bold,

@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class DateHelper {
   static String getCurrentMonthYear() {
     DateTime now = DateTime.now();
@@ -43,8 +45,7 @@ class DateHelper {
     return '$month - ${now.year}';
   }
 
-  static String format(String dateString,
-      {bool includeTime = false}) {
+  static String format(String dateString, {bool includeTime = false}) {
     DateTime dateTime = DateTime.parse(dateString);
     String formattedDate = '${dateTime.day.toString().padLeft(2, '0')}-'
         '${dateTime.month.toString().padLeft(2, '0')}-'
@@ -54,6 +55,13 @@ class DateHelper {
       formattedDate += ' ${dateTime.hour.toString().padLeft(2, '0')}:'
           '${dateTime.minute.toString().padLeft(2, '0')}';
     }
+
+    return formattedDate;
+  }
+
+  static String formatWith(DateTime dateString, {String format = "yyyy-MM-dd"}) {
+    String formattedDate =
+        DateFormat('yyyy-MM-dd').format(dateString);
 
     return formattedDate;
   }

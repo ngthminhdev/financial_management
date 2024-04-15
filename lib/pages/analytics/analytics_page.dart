@@ -6,7 +6,6 @@ import 'package:financial_management/widgets/budget_chart/double_column_chart.da
 import 'package:financial_management/widgets/button/row_select.dart';
 import 'package:financial_management/widgets/button/tab_button.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:remixicon/remixicon.dart';
 
 class AnalyticsPage extends StatefulWidget {
