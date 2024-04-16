@@ -99,7 +99,7 @@ class BudgetPageModel extends BasePageModel {
       Map<String, dynamic> body = {
         "type": transactionType,
         "category_id": selectedCategory!.id,
-        "wallet_id": "acfabb2a-cdfc-49b5-bf25-ea08c3f3797b",
+        "wallet_id": "526d288e-3eef-49a4-be61-6f32536b9c21",
         "goat_id": "",
         "date": DateHelper.formatWith(selectedDate),
         "note": note ?? '',

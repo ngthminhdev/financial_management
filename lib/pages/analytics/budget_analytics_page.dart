@@ -143,7 +143,7 @@ class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage> {
                                       children: [
                                         Text(
                                           DateHelper.format(
-                                              transaction.createdAt!),
+                                              transaction.date!),
                                           style: TextStyle(
                                             color: appColors.charcoal,
                                             fontWeight: FontWeight.bold,

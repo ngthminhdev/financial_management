@@ -10,6 +10,7 @@ class TransactionHistoryModel {
   final String? note;
   final int? type;
   final int? icon;
+  final String? date;
   final String? createdAt;
   final String? modifiedAt;
 
@@ -25,6 +26,7 @@ class TransactionHistoryModel {
     this.note,
     this.type,
     this.icon,
+    this.date,
     this.createdAt,
     this.modifiedAt,
   });
@@ -42,6 +44,7 @@ class TransactionHistoryModel {
       note: json['note'] ?? '',
       type: json['type'] ?? 1,
       icon: json['icon'] ?? 0,
+      date: json['date'],
       createdAt: json['created_at'],
       modifiedAt: json['modified_at'],
     );

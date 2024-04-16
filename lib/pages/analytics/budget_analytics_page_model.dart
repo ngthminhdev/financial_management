@@ -20,7 +20,7 @@ class BudgetAnalyticPageModel extends BasePageModel {
         'limit': '100',
         'sort_by': 'date',
         'sort_type': '-1',
-        'wallet_id': 'acfabb2a-cdfc-49b5-bf25-ea08c3f3797b'
+        'wallet_id': '526d288e-3eef-49a4-be61-6f32536b9c21'
       };
 
       List<TransactionHistoryModel> transactions = await TransactionService().getList(queries);
