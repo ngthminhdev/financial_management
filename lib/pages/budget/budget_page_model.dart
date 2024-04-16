@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 class BudgetPageModel extends BasePageModel {
-  BudgetPageModel(BuildContext context) : super(context);
+  BudgetPageModel(super.context, super.setState);
   GlobalKey<NavigatorState> dialogKey = GlobalKey<NavigatorState>();
 
   final MoneyMaskedTextController amountController = MoneyMaskedTextController(
@@ -37,15 +37,16 @@ class BudgetPageModel extends BasePageModel {
   }
 
   resetData() {
-    selectedCategory = null;
-    note = null;
-    amountController.text = "";
+    setState(() {
+      selectedCategory = null;
+      note = null;
+      amountController.text = "";
+    });
   }
 
   Future<void> getCategory() async {
     try {
-      Map<String, String> queries = {
-      };
+      Map<String, String> queries = {};
 
       List<CategoryModel> list = await CategoryService().getList(queries);
       for (var category in list) {
@@ -56,41 +57,52 @@ class BudgetPageModel extends BasePageModel {
             ),
             value: category.id);
 
-        listCategories.add(item);
-        mapCategories[category.id] = category;
+        // setState(() {
+          listCategories.add(item);
+          mapCategories[category.id] = category;
+        // });
       }
     } catch (e) {
-      Response error = e as Response;
+      print(e);
       appPopup.messagePopup(context,
-          message: error.message, type: PopupType.error);
+          message: e is Response ? e.message : appConstant.unknownError,
+          type: PopupType.error);
     }
   }
 
   setSelectedCategory(String? categoryId) {
     if (categoryId != null) {
-      CategoryModel? selectCategory = mapCategories[categoryId];
-      selectedCategory = selectCategory;
+      setState(() {
+        CategoryModel? selectCategory = mapCategories[categoryId];
+        selectedCategory = selectCategory;
+      });
     }
   }
 
   setSelectedDate(DateTime? value) {
     if (value != null) {
-      selectedDate = value;
+      setState(() {
+        selectedDate = value;
+      });
     }
   }
 
   setNote(String? value) {
     if (value != null) {
-      note = value;
+      setState(() {
+        note = value;
+      });
     }
   }
 
   setTransactionType(int? value) {
-    if (value == 0) {
-      transactionType = TRANSACTION_TYPE_INCOME;
-    } else {
-      transactionType = TRANSACTION_TYPE_SPENT;
-    }
+    setState(() {
+      if (value == 0) {
+        transactionType = TRANSACTION_TYPE_INCOME;
+      } else {
+        transactionType = TRANSACTION_TYPE_SPENT;
+      }
+    });
   }
 
   Future<void> createTransaction() async {
@@ -113,9 +125,9 @@ class BudgetPageModel extends BasePageModel {
       });
     } catch (e) {
       setBusy(dialogKey, false);
-      Response error = e as Response;
       appPopup.messagePopup(context,
-          message: error.message, type: PopupType.error);
+          message: e is Response ? e.message : appConstant.unknownError,
+          type: PopupType.error);
     }
   }
 }

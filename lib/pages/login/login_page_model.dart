@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:financial_management/base/base_page_model.dart';
+import 'package:financial_management/constant/app_constant.dart';
 import 'package:financial_management/helper/navigator_helper.dart';
 import 'package:financial_management/model/user_model.dart';
 import 'package:financial_management/router/router_config.dart';
@@ -16,7 +17,7 @@ class LoginPageModel extends BasePageModel {
   TextEditingController passwordController = TextEditingController();
   bool isSaveYourLogin = false;
 
-  LoginPageModel(BuildContext context) : super(context);
+  LoginPageModel(super.context, super.setState);
 
   void toggleSaveLogin(bool? value) {
     isSaveYourLogin = !isSaveYourLogin;
@@ -54,9 +55,8 @@ class LoginPageModel extends BasePageModel {
       navigatorHelper.changeView(context, RouteNames.main, isReplaceName: true);
     } catch (e) {
       setBusy(dialogKey, false);
-      Response error = e as Response;
       appPopup.messagePopup(context,
-      message: error.message, type: PopupType.error);
+      message:e is Response ? e.message: appConstant.unknownError, type: PopupType.error);
     }
   }
 }

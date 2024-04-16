@@ -7,8 +7,10 @@ import 'package:remixicon/remixicon.dart';
 
 class AppConstant {
   static final AppConstant _instance = AppConstant._internal();
-  // final String apiHost = '192.168.0.73:2002';
-  final String apiHost = '54.179.222.129:2002';
+  final String apiHost = '192.168.0.73:2002';
+  // final String apiHost = '54.179.222.129:2002';
+
+  final String unknownError = "Lôĩ không xác định";
 
   final List<PopupItem> budgetSelects = [
     PopupItem(
@@ -51,7 +53,8 @@ class AppConstant {
     13: Remix.tools_fill, // Tools
     14: Remix.funds_fill, // Đầu tư
     15: Remix.more_fill, // Khác
-    16: Icons.pets // Pet
+    16: Icons.pets, // Pet,
+    17: Ionicons.ice_cream, // Di choi
   };
 
 

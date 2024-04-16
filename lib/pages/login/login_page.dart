@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    pageModel = LoginPageModel(context);
+    pageModel = LoginPageModel(context, setState);
   }
 
   @override

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class BasePageModel {
   BuildContext context;
-  BasePageModel(this.context);
+  void Function(void Function()) setState;
+  BasePageModel(this.context, this.setState);
 
   bool _busy = false;
   bool _isForceLogin = false;
@@ -13,7 +14,7 @@ class BasePageModel {
   bool get isForceLogin => _isForceLogin;
   bool get invalidVersion => _invalidVersion;
 
-  setBusy(GlobalKey<NavigatorState> dialogKey, bool value) async {
+  setBusy(GlobalKey<NavigatorState> dialogKey, bool value,[ BuildContext? buildContext]) async {
     _busy = value;
     appPopup.loading(context, dialogKey: dialogKey, busy: value);
   }

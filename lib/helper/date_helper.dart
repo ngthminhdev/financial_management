@@ -46,9 +46,9 @@ class DateHelper {
   }
 
   static String format(String dateString, {bool includeTime = false}) {
-    DateTime dateTime = DateTime.parse(dateString);
-    String formattedDate = '${dateTime.day.toString().padLeft(2, '0')}-'
-        '${dateTime.month.toString().padLeft(2, '0')}-'
+    DateTime dateTime = DateTime.parse(dateString).toLocal();
+    String formattedDate = '${dateTime.day.toString().padLeft(2, '0')}/'
+        '${dateTime.month.toString().padLeft(2, '0')}/'
         '${dateTime.year.toString()}';
 
     if (includeTime) {

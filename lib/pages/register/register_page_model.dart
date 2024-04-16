@@ -1,3 +1,4 @@
+import 'package:financial_management/constant/app_constant.dart';
 import 'package:financial_management/helper/navigator_helper.dart';
 import 'package:financial_management/router/router_config.dart';
 import 'package:financial_management/services/api/auth_service.dart';
@@ -38,9 +39,9 @@ class RegisterPageModel {
             isReplaceName: true);
       });
     } catch (e) {
-      Response error = e as Response;
+
       appPopup.messagePopup(context,
-          message: error.message, type: PopupType.error);
+          message: e is Response ? e.message: appConstant.unknownError, type: PopupType.error);
     }
   }
 }

@@ -24,7 +24,7 @@ class _BudgetPageState extends State<BudgetPage> {
   @override
   void initState() {
     super.initState();
-    pageModel = BudgetPageModel(context);
+    pageModel = BudgetPageModel(context, setState);
     pageModel.initData();
   }
 
