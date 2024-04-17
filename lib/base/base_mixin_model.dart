@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-abstract class MixinModel<T extends ChangeNotifier?> {
+mixin MixinModel<T extends ChangeNotifier?> {
   Function(BuildContext, T, Widget?) withBuilder();
   T withModel();
   Widget withChild() {

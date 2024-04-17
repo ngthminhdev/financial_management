@@ -140,6 +140,7 @@ class HttpService {
         responseObject.isForceLogin = true;
         responseObject.message = 'Phiên đăng nhập hết hạn';
         await LocalStorageService().remove('JWT');
+        await LocalStorageService().remove('isSaveLoggedIn');
         // await appPopup.errorAuthorizePopup(appData.navigatorKey.currentContext!);
 
         throw responseObject;

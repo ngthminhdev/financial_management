@@ -1,3 +1,4 @@
+import 'package:financial_management/base/base_mixin_model.dart';
 import 'package:financial_management/constant/app_constant.dart';
 import 'package:financial_management/core/color.dart';
 import 'package:financial_management/helper/date_helper.dart';
@@ -5,8 +6,10 @@ import 'package:financial_management/helper/number_helper.dart';
 import 'package:financial_management/pages/analytics/budget_analytics_page_model.dart';
 import 'package:financial_management/widgets/budget_chart/category_icon_widget.dart';
 import 'package:financial_management/widgets/category_spent_chart/category_spent_chart.dart';
+import 'package:financial_management/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:remixicon/remixicon.dart';
 
 class BudgetAnalyticsPage extends StatefulWidget {
@@ -16,20 +19,41 @@ class BudgetAnalyticsPage extends StatefulWidget {
   State<BudgetAnalyticsPage> createState() => _BudgetAnalyticsPageState();
 }
 
-class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage> {
-  late BudgetAnalyticPageModel pageModel;
+class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage>
+    with MixinModel<BudgetAnalyticPageModel>, SingleTickerProviderStateMixin {
+  BudgetAnalyticPageModel pageModel = BudgetAnalyticPageModel();
 
   @override
-  void initState() {
-    super.initState();
-    pageModel = BudgetAnalyticPageModel(context, setState);
-    pageModel.initData();
+  BudgetAnalyticPageModel withModel() {
+    return pageModel;
   }
 
   @override
   Widget build(BuildContext context) {
+    return present(context);
+  }
+
+  @override
+  Function(BuildContext context, BudgetAnalyticPageModel _model, Widget? _child)
+      withBuilder() {
+    return (BuildContext context, BudgetAnalyticPageModel model,
+        Widget? child) {
+      return ModalProgressHUD(
+        inAsyncCall: pageModel.busy,
+        progressIndicator: const LoadingWidget(),
+        child: buildBody(context),
+      );
+    };
+  }
+
+  @override
+  void initState() {
+    pageModel.initData(context);
+    super.initState();
+  }
+
+  Widget buildBody(BuildContext context) {
     return Scaffold(
-      key: pageModel.dialogKey,
       body: SafeArea(
         child: Container(
           color: appColors.bg,

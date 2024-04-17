@@ -13,10 +13,10 @@ class BasePage<T extends ChangeNotifier> extends StatefulWidget {
       this.modelWillDispose = false});
 
   @override
-  _BasePageState<T> createState() => _BasePageState<T>();
+  BasePageState<T> createState() => BasePageState<T>();
 }
 
-class _BasePageState<T extends ChangeNotifier> extends State<BasePage<T>> {
+class BasePageState<T extends ChangeNotifier> extends State<BasePage<T>> {
   T? model;
 
   @override

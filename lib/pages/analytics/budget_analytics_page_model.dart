@@ -8,9 +8,7 @@ import 'package:financial_management/widgets/popups/select_popup_widget.dart';
 import 'package:flutter/material.dart';
 
 class BudgetAnalyticPageModel extends BasePageModel {
-  BudgetAnalyticPageModel(
-      BuildContext context, void Function(void Function()) setState)
-      : super(context, setState);
+  BudgetAnalyticPageModel();
   final GlobalKey<NavigatorState> dialogKey = GlobalKey<NavigatorState>();
   List<TransactionHistoryModel> listTransactions = [];
   List<CategoryModel> chartData = [];
@@ -18,19 +16,16 @@ class BudgetAnalyticPageModel extends BasePageModel {
 
   bool isDesc = true;
 
-
-  initData() async {
-    // setBusy(dialogKey, true, context);
+  initData(BuildContext context) async {
+    setBusy(true);
     await Future.wait([
-      getChartData(),
-      getTransactionList(),
+      getChartData(context),
+      getTransactionList(context),
     ]);
-    // Navigator.of(context).pop();
-    // await Future.delayed(Duration(seconds: 3));
-    // setBusy(dialogKey, false, context);
+    setBusy(false);
   }
 
-  Future<void> getTransactionList() async {
+  Future<void> getTransactionList(BuildContext context) async {
     try {
       Map<String, String> queries = {
         'skip': '0',
@@ -42,10 +37,8 @@ class BudgetAnalyticPageModel extends BasePageModel {
 
       List<TransactionHistoryModel> transactions =
           await TransactionService().getList(queries);
-      setState(() {
-        listTransactions = transactions;
-      });
-
+      listTransactions = transactions;
+      notifyListeners();
     } catch (e) {
       appPopup.messagePopup(context,
           message: e is Response ? e.message : appConstant.unknownError,
@@ -53,7 +46,7 @@ class BudgetAnalyticPageModel extends BasePageModel {
     }
   }
 
-  Future<void> getChartData() async {
+  Future<void> getChartData(BuildContext context) async {
     try {
       Map<String, String> queries = {
         "type": '2',
@@ -62,11 +55,11 @@ class BudgetAnalyticPageModel extends BasePageModel {
 
       List<CategoryModel> list =
           await TransactionService().getTransactionGroupByCategory(queries);
-      setState(() {
-        chartData = list;
-        totalSpent =
-            list.fold(0, (total, category) => total += category.amountUsed!);
-      });
+      chartData = list;
+      totalSpent =
+          list.fold(0, (total, category) => total += category.amountUsed!);
+
+      notifyListeners();
     } catch (e) {
       print(e);
       appPopup.messagePopup(context,
@@ -76,11 +69,8 @@ class BudgetAnalyticPageModel extends BasePageModel {
   }
 
   sortListTransaction() {
-    setState(
-      () {
-        isDesc = !isDesc;
-        listTransactions = listTransactions.reversed.toList();
-      },
-    );
+    isDesc = !isDesc;
+    listTransactions = listTransactions.reversed.toList();
+    notifyListeners();
   }
 }

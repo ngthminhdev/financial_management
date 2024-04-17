@@ -13,9 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 class BudgetPageModel extends BasePageModel {
-  BudgetPageModel(super.context, super.setState);
-  GlobalKey<NavigatorState> dialogKey = GlobalKey<NavigatorState>();
-
   final MoneyMaskedTextController amountController = MoneyMaskedTextController(
     thousandSeparator: ',',
     decimalSeparator: ',',
@@ -31,20 +28,19 @@ class BudgetPageModel extends BasePageModel {
   String? note;
   int transactionType = TRANSACTION_TYPE_INCOME;
 
-  initData() async {
+  initData(BuildContext context) async {
     amountController.text = "";
-    await getCategory();
+    await getCategory(context);
   }
 
   resetData() {
-    setState(() {
-      selectedCategory = null;
-      note = null;
-      amountController.text = "";
-    });
+    selectedCategory = null;
+    note = null;
+    amountController.text = "";
+    notifyListeners();
   }
 
-  Future<void> getCategory() async {
+  Future<void> getCategory(BuildContext context) async {
     try {
       Map<String, String> queries = {};
 
@@ -57,11 +53,10 @@ class BudgetPageModel extends BasePageModel {
             ),
             value: category.id);
 
-        // setState(() {
-          listCategories.add(item);
-          mapCategories[category.id] = category;
-        // });
+        listCategories.add(item);
+        mapCategories[category.id] = category;
       }
+      notifyListeners();
     } catch (e) {
       print(e);
       appPopup.messagePopup(context,
@@ -72,42 +67,38 @@ class BudgetPageModel extends BasePageModel {
 
   setSelectedCategory(String? categoryId) {
     if (categoryId != null) {
-      setState(() {
-        CategoryModel? selectCategory = mapCategories[categoryId];
-        selectedCategory = selectCategory;
-      });
+      CategoryModel? selectCategory = mapCategories[categoryId];
+      selectedCategory = selectCategory;
+      notifyListeners();
     }
   }
 
   setSelectedDate(DateTime? value) {
     if (value != null) {
-      setState(() {
-        selectedDate = value;
-      });
+      selectedDate = value;
+      notifyListeners();
     }
   }
 
   setNote(String? value) {
     if (value != null) {
-      setState(() {
-        note = value;
-      });
+      note = value;
+      notifyListeners();
     }
   }
 
   setTransactionType(int? value) {
-    setState(() {
-      if (value == 0) {
-        transactionType = TRANSACTION_TYPE_INCOME;
-      } else {
-        transactionType = TRANSACTION_TYPE_SPENT;
-      }
-    });
+    if (value == 0) {
+      transactionType = TRANSACTION_TYPE_INCOME;
+    } else {
+      transactionType = TRANSACTION_TYPE_SPENT;
+    }
+    notifyListeners();
   }
 
-  Future<void> createTransaction() async {
+  Future<void> createTransaction(BuildContext context) async {
     try {
-      setBusy(dialogKey, true);
+      setBusy(true);
       Map<String, dynamic> body = {
         "type": transactionType,
         "category_id": selectedCategory!.id,
@@ -119,12 +110,13 @@ class BudgetPageModel extends BasePageModel {
       };
 
       Response response = await TransactionService().create(body);
-      setBusy(dialogKey, false);
-      appPopup.messagePopup(context, message: response.message, callback: () {
+      setBusy(false);
+      return appPopup.messagePopup(context, message: response.message,
+          callback: () {
         resetData();
       });
     } catch (e) {
-      setBusy(dialogKey, false);
+      setBusy(false);
       appPopup.messagePopup(context,
           message: e is Response ? e.message : appConstant.unknownError,
           type: PopupType.error);

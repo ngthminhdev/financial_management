@@ -17,13 +17,11 @@ class LoginPageModel extends BasePageModel {
   TextEditingController passwordController = TextEditingController();
   bool isSaveYourLogin = false;
 
-  LoginPageModel(super.context, super.setState);
-
   void toggleSaveLogin(bool? value) {
     isSaveYourLogin = !isSaveYourLogin;
   }
 
-  Future<void> login() async {
+  Future<void> login(BuildContext context) async {
     try {
       if (accountNameController.text.isEmpty ||
           passwordController.text.isEmpty) {
@@ -31,7 +29,7 @@ class LoginPageModel extends BasePageModel {
             message: 'Vui lòng nhập đủ thông tin', type: PopupType.warning);
       }
 
-      setBusy(dialogKey, true);
+      setBusy(true);
       Map<String, dynamic> body = {
         'account_name': accountNameController.text,
         'password': passwordController.text,
@@ -51,10 +49,10 @@ class LoginPageModel extends BasePageModel {
       }
 
       await Future.wait(futures);
-      setBusy(dialogKey, false);
-      navigatorHelper.changeView(context, RouteNames.main, isReplaceName: true);
+      setBusy(false);
+      return navigatorHelper.changeView(context, RouteNames.main, isReplaceName: true);
     } catch (e) {
-      setBusy(dialogKey, false);
+      setBusy(false);
       appPopup.messagePopup(context,
       message:e is Response ? e.message: appConstant.unknownError, type: PopupType.error);
     }

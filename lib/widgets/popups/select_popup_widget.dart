@@ -1,6 +1,9 @@
 import 'package:financial_management/core/color.dart';
+import 'package:financial_management/helper/navigator_helper.dart';
+import 'package:financial_management/router/router_config.dart';
 import 'package:financial_management/widgets/button/button.dart';
 import 'package:financial_management/widgets/button/button_constant.dart';
+import 'package:financial_management/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:remixicon/remixicon.dart';
@@ -425,6 +428,10 @@ class Popup {
         });
       },
     );
+    if (message == 'Phiên đăng nhập hết hạn') {
+      return navigatorHelper.changeView(context, RouteNames.login,
+          isReplaceName: true);
+    }
     if (callback != null && callback is Function) {
       callback();
     }
@@ -440,20 +447,7 @@ class Popup {
         // transitionDuration: const Duration(milliseconds: 300),
         pageBuilder: (context, animation, secondaryAnimation) {
           return StatefulBuilder(builder: (context, setState) {
-            return WillPopScope(
-              onWillPop: () async {
-                return false;
-              },
-              child: Scaffold(
-                backgroundColor: Colors.transparent,
-                body: Center(
-                    child: LoadingAnimationWidget.discreteCircle(
-                        size: 50,
-                        color: appColors.purple,
-                        secondRingColor: appColors.mediumPurple,
-                        thirdRingColor: appColors.lightPurple)),
-              ),
-            );
+            return const LoadingWidget();
           });
         },
       );
@@ -468,5 +462,6 @@ class Popup {
   }
   Popup._internal();
 }
+
 
 final appPopup = Popup();

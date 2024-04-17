@@ -1,3 +1,4 @@
+import 'package:financial_management/base/base_mixin_model.dart';
 import 'package:financial_management/constant/app_constant.dart';
 import 'package:financial_management/core/color.dart';
 import 'package:financial_management/helper/date_helper.dart';
@@ -5,10 +6,12 @@ import 'package:financial_management/pages/budget/budget_page_model.dart';
 import 'package:financial_management/widgets/budget_chart/category_icon_widget.dart';
 import 'package:financial_management/widgets/button/button_constant.dart';
 import 'package:financial_management/widgets/button/row_select.dart';
+import 'package:financial_management/widgets/loading/loading_widget.dart';
 import 'package:financial_management/widgets/popups/select_popup_widget.dart';
 import 'package:financial_management/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:remixicon/remixicon.dart';
 
 class BudgetPage extends StatefulWidget {
@@ -18,14 +21,36 @@ class BudgetPage extends StatefulWidget {
   State<BudgetPage> createState() => _BudgetPageState();
 }
 
-class _BudgetPageState extends State<BudgetPage> {
-  late BudgetPageModel pageModel;
+class _BudgetPageState extends State<BudgetPage>
+    with MixinModel<BudgetPageModel>, SingleTickerProviderStateMixin {
+  BudgetPageModel pageModel = BudgetPageModel();
+
+  @override
+  BudgetPageModel withModel() {
+    return pageModel;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return present(context);
+  }
+
+  @override
+  Function(BuildContext context, BudgetPageModel _model, Widget? _child)
+      withBuilder() {
+    return (BuildContext context, BudgetPageModel model, Widget? child) {
+      return ModalProgressHUD(
+        inAsyncCall: pageModel.busy,
+        progressIndicator: const LoadingWidget(),
+        child: buildBody(context),
+      );
+    };
+  }
 
   @override
   void initState() {
     super.initState();
-    pageModel = BudgetPageModel(context, setState);
-    pageModel.initData();
+    pageModel.initData(context);
   }
 
   @override
@@ -34,10 +59,8 @@ class _BudgetPageState extends State<BudgetPage> {
     pageModel.amountController.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget buildBody(BuildContext context) {
     return Scaffold(
-      key: pageModel.dialogKey,
       body: SafeArea(
         child: GestureDetector(
           onTap: () {
@@ -369,7 +392,7 @@ class _BudgetPageState extends State<BudgetPage> {
                   size: FMButtonSize.max,
                   onPressed: () {
                     setState(() {
-                      pageModel.createTransaction();
+                      pageModel.createTransaction(context);
                     });
                   },
                 ),

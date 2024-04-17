@@ -1,11 +1,14 @@
+import 'package:financial_management/base/base_mixin_model.dart';
 import 'package:financial_management/core/color.dart';
 import 'package:financial_management/helper/navigator_helper.dart';
 import 'package:financial_management/pages/login/login_page_model.dart';
 import 'package:financial_management/router/router_config.dart';
 import 'package:financial_management/widgets/button/button_constant.dart';
+import 'package:financial_management/widgets/loading/loading_widget.dart';
 import 'package:financial_management/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:page_transition/page_transition.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,17 +18,33 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  late LoginPageModel pageModel;
+class _LoginPageState extends State<LoginPage>
+    with MixinModel<LoginPageModel>, SingleTickerProviderStateMixin {
+  LoginPageModel pageModel = LoginPageModel();
+
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    pageModel = LoginPageModel(context, setState);
+  LoginPageModel withModel() {
+    return pageModel;
   }
 
   @override
   Widget build(BuildContext context) {
+    return present(context);
+  }
+
+  @override
+  Function(BuildContext context, LoginPageModel _model, Widget? _child)
+      withBuilder() {
+    return (BuildContext context, LoginPageModel model, Widget? child) {
+      return ModalProgressHUD(
+        inAsyncCall: pageModel.busy,
+        progressIndicator: const LoadingWidget(),
+        child: buildBody(context),
+      );
+    };
+  }
+
+  Widget buildBody(BuildContext context) {
     return Scaffold(
       key: pageModel.dialogKey,
       body: SafeArea(
@@ -103,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                     text: 'Đăng nhập',
                     size: FMButtonSize.max,
                     onPressed: () async {
-                      pageModel.login();
+                      pageModel.login(context);
                     },
                   ),
                   Row(
