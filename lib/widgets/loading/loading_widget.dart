@@ -14,7 +14,7 @@ class LoadingWidget extends StatelessWidget {
         return false;
       },
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black38,
         body: Center(
             child: LoadingAnimationWidget.discreteCircle(
                 size: 50,

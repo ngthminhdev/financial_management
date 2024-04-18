@@ -6,5 +6,6 @@ class BasePageModel extends ChangeNotifier {
 
   setBusy(bool value) async {
     _busy = value;
+    notifyListeners();
   }
 }

@@ -30,6 +30,7 @@ class _MainPageState extends State<MainPage> {
   void _onNavbarChange(int index) {
     setState(() {
       selectedIndex = index;
+      WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
     });
     _pageController.animateToPage(selectedIndex,
         duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);

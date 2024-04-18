@@ -17,12 +17,14 @@ class BudgetAnalyticPageModel extends BasePageModel {
   bool isDesc = true;
 
   initData(BuildContext context) async {
-    setBusy(true);
+    // setBusy(true);
+    // await Future.delayed(Duration(seconds: 3));
     await Future.wait([
       getChartData(context),
       getTransactionList(context),
     ]);
-    setBusy(false);
+    notifyListeners();
+    // setBusy(false);
   }
 
   Future<void> getTransactionList(BuildContext context) async {
@@ -38,7 +40,7 @@ class BudgetAnalyticPageModel extends BasePageModel {
       List<TransactionHistoryModel> transactions =
           await TransactionService().getList(queries);
       listTransactions = transactions;
-      notifyListeners();
+      // notifyListeners();
     } catch (e) {
       appPopup.messagePopup(context,
           message: e is Response ? e.message : appConstant.unknownError,
@@ -59,7 +61,7 @@ class BudgetAnalyticPageModel extends BasePageModel {
       totalSpent =
           list.fold(0, (total, category) => total += category.amountUsed!);
 
-      notifyListeners();
+      // notifyListeners();
     } catch (e) {
       print(e);
       appPopup.messagePopup(context,

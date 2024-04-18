@@ -6,9 +6,10 @@ import 'package:financial_management/helper/number_helper.dart';
 import 'package:financial_management/pages/analytics/budget_analytics_page_model.dart';
 import 'package:financial_management/widgets/budget_chart/category_icon_widget.dart';
 import 'package:financial_management/widgets/category_spent_chart/category_spent_chart.dart';
+import 'package:financial_management/widgets/loading/category_icon_sketch.dart';
+import 'package:financial_management/widgets/loading/line_sketch.dart';
 import 'package:financial_management/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -114,104 +115,151 @@ class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage>
               Expanded(
                 // height: MediaQuery.of(context).size.height * 0.,
                 child: pageModel.listTransactions.isEmpty
-                    ? Center(
-                        child: LoadingAnimationWidget.discreteCircle(
-                            size: 50,
-                            color: appColors.purple,
-                            secondRingColor: appColors.mediumPurple,
-                            thirdRingColor: appColors.lightPurple))
-                    : ListView.separated(
-                        itemCount: pageModel.listTransactions.length,
-                        itemBuilder: (context, index) {
-                          final transaction = pageModel.listTransactions[index];
-                          return Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      CategoryIconWidget(
-                                        icon: appConstant
-                                            .categoryIconMap[transaction.icon]!,
-                                        color: appColors.lightPink,
-                                        iconColor: appColors.darkCharcoal,
-                                      ),
-                                      const SizedBox(
-                                        width: 12,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            transaction.categoryName!,
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: appColors.darkCharcoal,
-                                            ),
-                                          ),
-                                          Text(
-                                            transaction.note!,
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              // fontWeight: FontWeight.bold,
-                                              color: appColors.darkCharcoal,
-                                            ),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          Text(
-                                            DateHelper.format(
-                                                transaction.date!),
-                                            style: TextStyle(
-                                              color: appColors.charcoal,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Row(
-                                            // mainAxisAlignment: MainAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                NumberHelper.formatMoney(
-                                                    transaction.amount!),
-                                                style: TextStyle(
-                                                  color: appColors.strongOrange,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                ]),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return Divider(
-                            thickness: 1,
-                            color: appColors.grey,
-                          );
-                        }),
+                    ? buildListTransactionsSketch()
+                    : buildListTransactions(),
               )
             ],
           ),
         ),
       ),
     );
+  }
+
+  ListView buildListTransactionsSketch() {
+    return ListView.separated(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      CategoryIconSketch(
+                          (MediaQuery.of(context).size.width * 0.43 - 30) * 0.3,
+                          40),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          LineSketch(150, 16),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          LineSketch(100, 14),
+                        ],
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          LineSketch(90, 16),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          LineSketch(70, 14),
+                        ],
+                      ),
+                    ],
+                  )
+                ]),
+          );
+        },
+        separatorBuilder: (context, index) {
+          return Divider(
+            thickness: 1,
+            color: appColors.grey,
+          );
+        });
+  }
+
+  ListView buildListTransactions() {
+    return ListView.separated(
+        itemCount: pageModel.listTransactions.length,
+        itemBuilder: (context, index) {
+          final transaction = pageModel.listTransactions[index];
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      CategoryIconWidget(
+                        icon: appConstant.categoryIconMap[transaction.icon]!,
+                        color: appColors.lightPink,
+                        iconColor: appColors.darkCharcoal,
+                      ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            transaction.categoryName!,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: appColors.darkCharcoal,
+                            ),
+                          ),
+                          Text(
+                            transaction.note!,
+                            style: TextStyle(
+                              fontSize: 14,
+                              // fontWeight: FontWeight.bold,
+                              color: appColors.darkCharcoal,
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            DateHelper.format(transaction.date!),
+                            style: TextStyle(
+                              color: appColors.charcoal,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Row(
+                            // mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                NumberHelper.formatMoney(transaction.amount!),
+                                style: TextStyle(
+                                  color: appColors.strongOrange,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ]),
+          );
+        },
+        separatorBuilder: (context, index) {
+          return Divider(
+            thickness: 1,
+            color: appColors.grey,
+          );
+        });
   }
 }

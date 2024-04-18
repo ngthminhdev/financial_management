@@ -1,7 +1,9 @@
 import 'package:animations/animations.dart';
 import 'package:financial_management/core/color.dart';
+import 'package:financial_management/helper/navigator_helper.dart';
 import 'package:financial_management/helper/number_helper.dart';
 import 'package:financial_management/pages/analytics/budget_analytics_page.dart';
+import 'package:financial_management/router/router_config.dart';
 import 'package:financial_management/widgets/budget_chart/double_column_chart.dart';
 import 'package:financial_management/widgets/button/row_select.dart';
 import 'package:financial_management/widgets/button/tab_button.dart';
@@ -183,39 +185,68 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                       const SizedBox(
                         height: 16,
                       ),
-                      OpenContainer(
-                        transitionType: ContainerTransitionType.fade,
-                        transitionDuration: Duration(milliseconds: 500),
-                        openBuilder: (context, _) => BudgetAnalyticsPage(),
-                        closedBuilder: (context, VoidCallback openContainer) =>
-                            GestureDetector(
-                          behavior: HitTestBehavior.translucent,
-                          onTap: openContainer,
-                          child: Container(
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(
-                                      0.2), // Màu và độ trong suốt của shadow
-                                  spreadRadius: 2, // Độ lan rộng của shadow
-                                  blurRadius: 5, // Độ mờ của shadow
-                                  offset: const Offset(
-                                      0, 3), // Độ dịch chuyển của shadow (x, y)
-                                ),
-                              ],
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: RowSelectWidget(
-                              title: 'Chi tiết khoản chi',
-                              icon: Remix.exchange_fill,
-                              color: appColors.strongOrange,
-                            ),
+                      GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onTap: () {
+                          navigatorHelper.changeView(
+                              context, RouteNames.budgetAnalytics);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(
+                                    0.2), // Màu và độ trong suốt của shadow
+                                spreadRadius: 2, // Độ lan rộng của shadow
+                                blurRadius: 5, // Độ mờ của shadow
+                                offset: const Offset(
+                                    0, 3), // Độ dịch chuyển của shadow (x, y)
+                              ),
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: RowSelectWidget(
+                            title: 'Chi tiết khoản chi',
+                            icon: Remix.exchange_fill,
+                            color: appColors.strongOrange,
                           ),
                         ),
                       ),
-                 ]),
+                      // OpenContainer(
+                      //   transitionType: ContainerTransitionType.fade,
+                      //   transitionDuration: Duration(milliseconds: 500),
+                      //   openBuilder: (context, _) => BudgetAnalyticsPage(),
+                      //   closedBuilder: (context, VoidCallback openContainer) =>
+                      //       GestureDetector(
+                      //     behavior: HitTestBehavior.translucent,
+                      //     onTap: openContainer,
+                      //     child: Container(
+                      //       padding: const EdgeInsets.all(16),
+                      //       decoration: BoxDecoration(
+                      //         boxShadow: [
+                      //           BoxShadow(
+                      //             color: Colors.grey.withOpacity(
+                      //                 0.2), // Màu và độ trong suốt của shadow
+                      //             spreadRadius: 2, // Độ lan rộng của shadow
+                      //             blurRadius: 5, // Độ mờ của shadow
+                      //             offset: const Offset(
+                      //                 0, 3), // Độ dịch chuyển của shadow (x, y)
+                      //           ),
+                      //         ],
+                      //         color: Colors.white,
+                      //         borderRadius: BorderRadius.circular(20),
+                      //       ),
+                      //       child: RowSelectWidget(
+                      //         title: 'Chi tiết khoản chi',
+                      //         icon: Remix.exchange_fill,
+                      //         color: appColors.strongOrange,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                    ]),
               ),
             ],
           ),
