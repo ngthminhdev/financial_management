@@ -49,7 +49,7 @@ class DoubleColumnChart extends StatelessWidget {
                           topRight: Radius.circular(5)),
                       dataSource: chartData,
                       xValueMapper: (TransactionHistoryModel data, _) =>
-                          DateTime.parse(data.date!),
+                          DateTime.parse(data.date!).toLocal(),
                       yValueMapper: (TransactionHistoryModel data, _) =>
                           data.income,
                       color: appColors.green,
@@ -61,7 +61,7 @@ class DoubleColumnChart extends StatelessWidget {
                           topRight: Radius.circular(5)),
                       dataSource: chartData,
                       xValueMapper: (TransactionHistoryModel data, _) =>
-                          DateTime.parse(data.date!),
+                          DateTime.parse(data.date!).toLocal(),
                       yValueMapper: (TransactionHistoryModel data, _) =>
                           data.spent!.abs(),
                       color: appColors.strongOrange,

@@ -57,6 +57,7 @@ class AppConstant {
     16: Icons.pets, // Pet,
     17: Ionicons.ice_cream, // Di choi
     18: Remix.hearts_fill,
+    19: Remix.refund_fill, // Luong
   };
 
 
