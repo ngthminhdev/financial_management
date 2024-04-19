@@ -88,7 +88,7 @@ class BudgetPageModel extends BasePageModel {
   }
 
   setTransactionType(int? value) {
-    if (value == 0) {
+    if (value == 1) {
       transactionType = TRANSACTION_TYPE_INCOME;
     } else {
       transactionType = TRANSACTION_TYPE_SPENT;

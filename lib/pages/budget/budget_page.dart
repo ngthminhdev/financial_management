@@ -91,7 +91,7 @@ class _BudgetPageState extends State<BudgetPage>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FMTabButton(
-                      tabTitles: const ["Thu", "Chi"],
+                      tabTitles: const ["Chi", "Thu"],
                       onTabChange: (int tab) {
                         setState(() {
                           pageModel.setTransactionType(tab);
@@ -138,10 +138,10 @@ class _BudgetPageState extends State<BudgetPage>
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
                         ],
-                        onChanged: (amount) {
-                          print(
-                              'File: lib/pages/budget/budget_page.dart - Line: 105: $amount ');
-                        },
+                        // onChanged: (amount) {
+                        //   print(
+                        //       'File: lib/pages/budget/budget_page.dart - Line: 105: $amount ');
+                        // },
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -330,6 +330,7 @@ class _BudgetPageState extends State<BudgetPage>
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: appColors.darkPurple)),
+                                    initialValue: pageModel.note!,
                             callback: (String? value) {
                               setState(() {
                                 pageModel.setNote(value);

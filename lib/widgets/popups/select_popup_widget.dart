@@ -113,8 +113,9 @@ class Popup {
   }
 
   void textAreaPopup(BuildContext context,
-      {required Function(String?) callback, Widget? title}) async {
+      {required Function(String?) callback, Widget? title, String initialValue = ''}) async {
     TextEditingController controller = TextEditingController();
+    controller.text = initialValue;
     dynamic value = await showGeneralDialog(
       context: context,
       barrierColor: Colors.black45,

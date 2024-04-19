@@ -42,7 +42,7 @@ class User {
         avatar: json['avatar'],
         role: json['role'],
         status: json['status'],
-        permissions: json['permissions'] ?? [],
+        permissions: json['permissions'] != null ? List<String>.from(json['permissions'].map(( per ) => per.toString())) : [],
         memberShipType: json['member_ship_type'],
         configStartDate: json['config_start_date'],
         createdAt: json['created_at'],
