@@ -9,7 +9,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
 		if (event is RegisterFormSubmitEvent) {
 			yield RegisterFormInitial();
 
-			await Future.delayed(Duration(seconds: 2));
+			await Future.delayed(const Duration(seconds: 2));
 
 
 

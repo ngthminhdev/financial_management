@@ -1,5 +1,4 @@
 import 'package:financial_management/core/color.dart';
-import 'package:financial_management/pages/home/widgets/advice_widget.dart';
 import 'package:financial_management/pages/home/widgets/budget_widget.dart';
 import 'package:financial_management/pages/home/widgets/expenses_widget.dart';
 import 'package:financial_management/pages/home/widgets/goal_widget.dart';
@@ -50,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 8,
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     BudgetWidget(),
@@ -84,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 8,
                 ),
-                GoalWidget(),
+                const GoalWidget(),
                 // const SizedBox(
                 //   height: 16,
                 // ),

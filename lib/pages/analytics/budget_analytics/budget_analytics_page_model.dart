@@ -1,7 +1,9 @@
 import 'package:financial_management/base/base_page_model.dart';
 import 'package:financial_management/constant/app_constant.dart';
+import 'package:financial_management/core/color.dart';
 import 'package:financial_management/model/category_model.dart';
 import 'package:financial_management/model/transaction_history_model.dart';
+import 'package:financial_management/pages/budget/constants.dart';
 import 'package:financial_management/services/api/transaction_service.dart';
 import 'package:financial_management/services/http_service.dart';
 import 'package:financial_management/widgets/popups/select_popup_widget.dart';
@@ -13,12 +15,19 @@ class BudgetAnalyticPageModel extends BasePageModel {
   List<TransactionHistoryModel> listTransactions = [];
   List<CategoryModel> chartData = [];
   double totalSpent = 0;
+  String type = '$TRANSACTION_TYPE_SPENT';
 
   bool isDesc = true;
+  Color textColor = appColors.green;
+  String title = 'Chi tiết khoản thu';
 
-  initData(BuildContext context) async {
-    // setBusy(true);
-    // await Future.delayed(Duration(seconds: 3));
+  initData(BuildContext context, String type) async {
+    if (type == '$TRANSACTION_TYPE_SPENT') {
+      textColor = appColors.strongOrange;
+      title = 'Chi tiết khoản chi';
+    }
+
+    this.type = type;
     await Future.wait([
       getChartData(context),
       getTransactionList(context),
@@ -34,6 +43,7 @@ class BudgetAnalyticPageModel extends BasePageModel {
         'limit': '100',
         'sort_by': 'date',
         'sort_type': '-1',
+        'type': type,
         'wallet_id': '526d288e-3eef-49a4-be61-6f32536b9c21'
       };
 
@@ -51,7 +61,7 @@ class BudgetAnalyticPageModel extends BasePageModel {
   Future<void> getChartData(BuildContext context) async {
     try {
       Map<String, String> queries = {
-        "type": '2',
+        "type": type,
         "wallet_id": "526d288e-3eef-49a4-be61-6f32536b9c21",
       };
 

@@ -17,7 +17,7 @@ class BudgetChart extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width * 0.33,
           height: MediaQuery.of(context).size.height * 0.15,
           child: Center(
@@ -89,7 +89,7 @@ class BudgetChart extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Symbols.add_circle,
               size: 14,
               color: Colors.green,

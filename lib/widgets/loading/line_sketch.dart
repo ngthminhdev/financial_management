@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:financial_management/core/color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 class LineSketch extends StatefulWidget {
   double width = 100;
   double height = 10;
-  LineSketch(this.width, this.height);
+  LineSketch(this.width, this.height, {super.key});
 
   @override
   State<LineSketch> createState() => _LineSketchState();

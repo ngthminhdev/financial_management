@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage>
   }
 
   @override
-  Function(BuildContext context, LoginPageModel _model, Widget? _child)
+  Function(BuildContext context, LoginPageModel model, Widget? child)
       withBuilder() {
     return (BuildContext context, LoginPageModel model, Widget? child) {
       return ModalProgressHUD(

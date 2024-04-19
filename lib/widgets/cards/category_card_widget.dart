@@ -20,14 +20,14 @@ class CategoryCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.43 - 30,
       height: 40,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CategoryIconWidget(icon: icon),
-          Container(
+          SizedBox(
               width: (MediaQuery.of(context).size.width * 0.43 - 30) * 0.65,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,14 +36,14 @@ class CategoryCardWidget extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
                       color: Colors.grey,
                     ),
                   ),
                   AutoSizeText(
-                    "${NumberHelper.formatMoney(amountUsed)}",
+                    NumberHelper.formatMoney(amountUsed),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: appColors.strongOrange,

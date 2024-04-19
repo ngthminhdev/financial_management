@@ -21,7 +21,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final bool isSaveLoggedIn;
   final bool isAppInit;
-  MyApp({super.key, required this.isAppInit, required this.isSaveLoggedIn});
+  const MyApp({super.key, required this.isAppInit, required this.isSaveLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +36,10 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: route.Router.generateRoute,
       home: Scaffold(
         body: isSaveLoggedIn
-            ? MainPage()
+            ? const MainPage()
             : isAppInit
-                ? LoginPage()
-                : IntroductionPage(),
+                ? const LoginPage()
+                : const IntroductionPage(),
       ),
     );
   }

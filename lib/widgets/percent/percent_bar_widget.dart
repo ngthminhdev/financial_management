@@ -1,7 +1,6 @@
 import 'package:financial_management/core/color.dart';
 import 'package:financial_management/helper/number_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class PercentBar extends StatelessWidget {
   final double target;
@@ -38,7 +37,7 @@ class PercentBar extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           Row(

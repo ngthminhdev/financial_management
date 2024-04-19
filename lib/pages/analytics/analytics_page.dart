@@ -1,13 +1,16 @@
-import 'package:animations/animations.dart';
+import 'package:financial_management/base/base_mixin_model.dart';
 import 'package:financial_management/core/color.dart';
 import 'package:financial_management/helper/navigator_helper.dart';
 import 'package:financial_management/helper/number_helper.dart';
-import 'package:financial_management/pages/analytics/budget_analytics_page.dart';
+import 'package:financial_management/pages/analytics/analytics_page_model.dart';
+import 'package:financial_management/pages/budget/constants.dart';
 import 'package:financial_management/router/router_config.dart';
 import 'package:financial_management/widgets/budget_chart/double_column_chart.dart';
 import 'package:financial_management/widgets/button/row_select.dart';
 import 'package:financial_management/widgets/button/tab_button.dart';
+import 'package:financial_management/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:remixicon/remixicon.dart';
 
 class AnalyticsPage extends StatefulWidget {
@@ -17,9 +20,42 @@ class AnalyticsPage extends StatefulWidget {
   State<AnalyticsPage> createState() => _AnalyticsPageState();
 }
 
-class _AnalyticsPageState extends State<AnalyticsPage> {
+class _AnalyticsPageState extends State<AnalyticsPage> with MixinModel<AnalyticPageModel>, SingleTickerProviderStateMixin {
+  AnalyticPageModel pageModel = AnalyticPageModel();
+
+  @override
+  AnalyticPageModel withModel() {
+    return pageModel;
+  }
+
+  
   @override
   Widget build(BuildContext context) {
+    return present(context);
+  }
+
+  @override
+  Function(BuildContext context, AnalyticPageModel model, Widget? child)
+      withBuilder() {
+    return (BuildContext context, AnalyticPageModel model, Widget? child) {
+      return ModalProgressHUD(
+        inAsyncCall: pageModel.busy,
+        progressIndicator: const LoadingWidget(),
+        child: buildBody(context),
+      );
+    };
+  }
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    pageModel.initData(context);
+  }
+
+  
+  Widget buildBody(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -73,7 +109,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                             size: 20,
                           ),
                           Text(
-                            ' ${NumberHelper.formatMoney(13150000)}',
+                            ' ${NumberHelper.formatMoney(pageModel.totalInOut.income)}',
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -110,7 +146,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                             size: 20,
                           ),
                           Text(
-                            ' ${NumberHelper.formatMoney(8150000)}',
+                            ' ${NumberHelper.formatMoney(pageModel.totalInOut.spent.abs())}',
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -140,28 +176,27 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
               const SizedBox(
                 height: 16,
               ),
-              DoubleColumnChart(),
+              DoubleColumnChart(
+                  chartData: pageModel.chartData),
               const SizedBox(
                 height: 48,
               ),
               Expanded(
-                child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      OpenContainer(
-                        transitionType: ContainerTransitionType.fade,
-                        transitionDuration: Duration(milliseconds: 500),
-                        openBuilder: (context, _) => BudgetAnalyticsPage(),
-                        closedBuilder: (context, VoidCallback openContainer) =>
-                            GestureDetector(
+                child: SingleChildScrollView(
+                  child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GestureDetector(
                           behavior: HitTestBehavior.translucent,
-                          // onTap: openContainer,
-                          onTap: () {},
+                          onTap: () {
+                            navigatorHelper.changeView(
+                                context, RouteNames.budgetAnalytics,
+                                params: {'type': '$TRANSACTION_TYPE_INCOME'});
+                          },
                           child: Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(
@@ -173,6 +208,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                                 ),
                               ],
                               color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
                             ),
                             child: RowSelectWidget(
                               title: 'Chi tiết khoản thu',
@@ -181,72 +217,73 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          navigatorHelper.changeView(
-                              context, RouteNames.budgetAnalytics);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(
-                                    0.2), // Màu và độ trong suốt của shadow
-                                spreadRadius: 2, // Độ lan rộng của shadow
-                                blurRadius: 5, // Độ mờ của shadow
-                                offset: const Offset(
-                                    0, 3), // Độ dịch chuyển của shadow (x, y)
-                              ),
-                            ],
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: RowSelectWidget(
-                            title: 'Chi tiết khoản chi',
-                            icon: Remix.exchange_fill,
-                            color: appColors.strongOrange,
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: () {
+                            navigatorHelper.changeView(
+                                context, RouteNames.budgetAnalytics,
+                                params: {'type': '$TRANSACTION_TYPE_SPENT'});
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(
+                                      0.2), // Màu và độ trong suốt của shadow
+                                  spreadRadius: 2, // Độ lan rộng của shadow
+                                  blurRadius: 5, // Độ mờ của shadow
+                                  offset: const Offset(
+                                      0, 3), // Độ dịch chuyển của shadow (x, y)
+                                ),
+                              ],
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: RowSelectWidget(
+                              title: 'Chi tiết khoản chi',
+                              icon: Remix.exchange_fill,
+                              color: appColors.strongOrange,
+                            ),
                           ),
                         ),
-                      ),
-                      // OpenContainer(
-                      //   transitionType: ContainerTransitionType.fade,
-                      //   transitionDuration: Duration(milliseconds: 500),
-                      //   openBuilder: (context, _) => BudgetAnalyticsPage(),
-                      //   closedBuilder: (context, VoidCallback openContainer) =>
-                      //       GestureDetector(
-                      //     behavior: HitTestBehavior.translucent,
-                      //     onTap: openContainer,
-                      //     child: Container(
-                      //       padding: const EdgeInsets.all(16),
-                      //       decoration: BoxDecoration(
-                      //         boxShadow: [
-                      //           BoxShadow(
-                      //             color: Colors.grey.withOpacity(
-                      //                 0.2), // Màu và độ trong suốt của shadow
-                      //             spreadRadius: 2, // Độ lan rộng của shadow
-                      //             blurRadius: 5, // Độ mờ của shadow
-                      //             offset: const Offset(
-                      //                 0, 3), // Độ dịch chuyển của shadow (x, y)
-                      //           ),
-                      //         ],
-                      //         color: Colors.white,
-                      //         borderRadius: BorderRadius.circular(20),
-                      //       ),
-                      //       child: RowSelectWidget(
-                      //         title: 'Chi tiết khoản chi',
-                      //         icon: Remix.exchange_fill,
-                      //         color: appColors.strongOrange,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                    ]),
+                        // OpenContainer(
+                        //   transitionType: ContainerTransitionType.fade,
+                        //   transitionDuration: Duration(milliseconds: 500),
+                        //   openBuilder: (context, _) => BudgetAnalyticsPage(),
+                        //   closedBuilder: (context, VoidCallback openContainer) =>
+                        //       GestureDetector(
+                        //     behavior: HitTestBehavior.translucent,
+                        //     onTap: openContainer,
+                        //     child: Container(
+                        //       padding: const EdgeInsets.all(16),
+                        //       decoration: BoxDecoration(
+                        //         boxShadow: [
+                        //           BoxShadow(
+                        //             color: Colors.grey.withOpacity(
+                        //                 0.2), // Màu và độ trong suốt của shadow
+                        //             spreadRadius: 2, // Độ lan rộng của shadow
+                        //             blurRadius: 5, // Độ mờ của shadow
+                        //             offset: const Offset(
+                        //                 0, 3), // Độ dịch chuyển của shadow (x, y)
+                        //           ),
+                        //         ],
+                        //         color: Colors.white,
+                        //         borderRadius: BorderRadius.circular(20),
+                        //       ),
+                        //       child: RowSelectWidget(
+                        //         title: 'Chi tiết khoản chi',
+                        //         icon: Remix.exchange_fill,
+                        //         color: appColors.strongOrange,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                      ]),
+                ),
               ),
             ],
           ),

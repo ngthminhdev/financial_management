@@ -19,12 +19,12 @@ class _MainPageState extends State<MainPage> {
   late PageController _pageController;
   int selectedIndex = 3;
 
-  List<Widget> _listOfPages = <Widget>[
-    Container(alignment: Alignment.center, child: HomePage()),
-    Container(alignment: Alignment.center, child: PlanPage()),
-    Container(alignment: Alignment.center, child: BudgetPage()),
-    Container(alignment: Alignment.center, child: AnalyticsPage()),
-    Container(alignment: Alignment.center, child: MorePage()),
+  final List<Widget> _listOfPages = <Widget>[
+    Container(alignment: Alignment.center, child: const HomePage()),
+    Container(alignment: Alignment.center, child: const PlanPage()),
+    Container(alignment: Alignment.center, child: const BudgetPage()),
+    Container(alignment: Alignment.center, child: const AnalyticsPage()),
+    Container(alignment: Alignment.center, child: const MorePage()),
   ];
 
   void _onNavbarChange(int index) {

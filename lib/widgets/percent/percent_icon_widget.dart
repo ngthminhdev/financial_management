@@ -16,8 +16,8 @@ class PercentIcon extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "${percent}%",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          "$percent%",
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
     );

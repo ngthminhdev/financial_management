@@ -36,7 +36,7 @@ class _BudgetPageState extends State<BudgetPage>
   }
 
   @override
-  Function(BuildContext context, BudgetPageModel _model, Widget? _child)
+  Function(BuildContext context, BudgetPageModel model, Widget? child)
       withBuilder() {
     return (BuildContext context, BudgetPageModel model, Widget? child) {
       return ModalProgressHUD(
@@ -144,7 +144,7 @@ class _BudgetPageState extends State<BudgetPage>
                         },
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Container(
                       padding: const EdgeInsets.fromLTRB(10, 3, 10, 3),
                       decoration: BoxDecoration(
@@ -376,7 +376,7 @@ class _BudgetPageState extends State<BudgetPage>
                     ],
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 // Row(
                 // mainAxisAlignment: MainAxisAlignment.start,
                 // children: [

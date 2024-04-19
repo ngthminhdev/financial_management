@@ -7,7 +7,7 @@ import 'package:remixicon/remixicon.dart';
 class CategoryIconSketch extends StatefulWidget {
   double width = 100;
   double height = 10;
-  CategoryIconSketch(this.width, this.height);
+  CategoryIconSketch(this.width, this.height, {super.key});
 
   @override
   State<CategoryIconSketch> createState() => _CategoryIconSketchState();

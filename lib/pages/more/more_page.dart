@@ -1,6 +1,5 @@
 import 'package:animations/animations.dart';
 import 'package:financial_management/core/color.dart';
-import 'package:financial_management/helper/date_helper.dart';
 import 'package:financial_management/pages/login/login_page.dart';
 import 'package:financial_management/widgets/button/row_select.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +41,7 @@ class _MorePageState extends State<MorePage> {
                   ),
                   Container(
                     // padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     height: 200,
                     width: MediaQuery.of(context).size.width - 40,
                     decoration: BoxDecoration(
@@ -77,7 +76,7 @@ class _MorePageState extends State<MorePage> {
                                     end: Alignment.bottomRight,
                                   ),
                                 ),
-                                child: CircleAvatar(
+                                child: const CircleAvatar(
                                   radius: 70,
                                   backgroundColor: Colors.transparent,
                                   child: CircleAvatar(
@@ -100,7 +99,7 @@ class _MorePageState extends State<MorePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.only(top: 3),
+                                    margin: const EdgeInsets.only(top: 3),
                                     child: Icon(Remix.profile_line,
                                         size: 22, color: appColors.darkPurple),
                                   ),
@@ -170,8 +169,8 @@ class _MorePageState extends State<MorePage> {
                   ),
                   OpenContainer(
                     transitionType: ContainerTransitionType.fade,
-                    transitionDuration: Duration(milliseconds: 500),
-                    openBuilder: (context, _) => LoginPage(),
+                    transitionDuration: const Duration(milliseconds: 500),
+                    openBuilder: (context, _) => const LoginPage(),
                     closedBuilder: (context, VoidCallback openContainer) =>
                         GestureDetector(
                       behavior: HitTestBehavior.translucent,
@@ -193,7 +192,7 @@ class _MorePageState extends State<MorePage> {
                           ],
                           color: Colors.white,
                         ),
-                        child: RowSelectWidget(
+                        child: const RowSelectWidget(
                           title: 'Chỉnh sửa thông tin',
                           icon: Remix.edit_2_fill,
                           // color: appColors.green,
@@ -206,8 +205,8 @@ class _MorePageState extends State<MorePage> {
                   ),
                   OpenContainer(
                     transitionType: ContainerTransitionType.fade,
-                    transitionDuration: Duration(milliseconds: 500),
-                    openBuilder: (context, _) => LoginPage(),
+                    transitionDuration: const Duration(milliseconds: 500),
+                    openBuilder: (context, _) => const LoginPage(),
                     closedBuilder: (context, VoidCallback openContainer) =>
                         GestureDetector(
                       behavior: HitTestBehavior.translucent,
@@ -229,7 +228,7 @@ class _MorePageState extends State<MorePage> {
                           ],
                           color: Colors.white,
                         ),
-                        child: RowSelectWidget(
+                        child: const RowSelectWidget(
                           title: 'Cài đặt',
                           icon: Remix.settings_3_fill,
                           // color: appColors.green,
@@ -242,8 +241,8 @@ class _MorePageState extends State<MorePage> {
                   ),
                   OpenContainer(
                     transitionType: ContainerTransitionType.fade,
-                    transitionDuration: Duration(milliseconds: 500),
-                    openBuilder: (context, _) => LoginPage(),
+                    transitionDuration: const Duration(milliseconds: 500),
+                    openBuilder: (context, _) => const LoginPage(),
                     closedBuilder: (context, VoidCallback openContainer) =>
                         GestureDetector(
                       behavior: HitTestBehavior.translucent,
@@ -265,7 +264,7 @@ class _MorePageState extends State<MorePage> {
                           ],
                           color: Colors.white,
                         ),
-                        child: RowSelectWidget(
+                        child: const RowSelectWidget(
                           title: 'Nâng cấp lên phiên bản Premium',
                           icon: Remix.key_2_fill,
                           // color: appColors.green,
@@ -278,8 +277,8 @@ class _MorePageState extends State<MorePage> {
                   ),
                   OpenContainer(
                     transitionType: ContainerTransitionType.fade,
-                    transitionDuration: Duration(milliseconds: 500),
-                    openBuilder: (context, _) => LoginPage(),
+                    transitionDuration: const Duration(milliseconds: 500),
+                    openBuilder: (context, _) => const LoginPage(),
                     closedBuilder: (context, VoidCallback openContainer) =>
                         GestureDetector(
                       behavior: HitTestBehavior.translucent,
@@ -301,7 +300,7 @@ class _MorePageState extends State<MorePage> {
                           ],
                           color: Colors.white,
                         ),
-                        child: RowSelectWidget(
+                        child: const RowSelectWidget(
                           title: 'Đăng xuất',
                           icon: Remix.logout_box_fill,
                           // color: appColors.green,
@@ -314,8 +313,8 @@ class _MorePageState extends State<MorePage> {
                   ),
                   OpenContainer(
                     transitionType: ContainerTransitionType.fade,
-                    transitionDuration: Duration(milliseconds: 500),
-                    openBuilder: (context, _) => LoginPage(),
+                    transitionDuration: const Duration(milliseconds: 500),
+                    openBuilder: (context, _) => const LoginPage(),
                     closedBuilder: (context, VoidCallback openContainer) =>
                         GestureDetector(
                       behavior: HitTestBehavior.translucent,
@@ -337,7 +336,7 @@ class _MorePageState extends State<MorePage> {
                           ],
                           color: Colors.white,
                         ),
-                        child: RowSelectWidget(
+                        child: const RowSelectWidget(
                           title: 'Ủng hộ tác giả',
                           icon: Remix.hand_coin_fill,
                           // color: appColors.green,

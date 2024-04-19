@@ -46,7 +46,7 @@ class _BudgetWidgetState extends State<BudgetWidget> {
           ),
           Text(
             currentMonth,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 12,
               color: Colors.grey,
@@ -55,13 +55,13 @@ class _BudgetWidgetState extends State<BudgetWidget> {
           const SizedBox(height: 5),
           Text(
             "\$ ${NumberHelper.formatMoney(totalBudget)}",
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 17,
               color: Colors.black,
             ),
           ),
-          Container(
+          SizedBox(
             // color: Colors.red,
             width: MediaQuery.of(context).size.width * 0.43 - 30,
             child: Row(

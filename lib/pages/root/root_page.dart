@@ -1,6 +1,5 @@
 import 'package:financial_management/pages/introduction/introduction_page.dart';
 import 'package:financial_management/pages/login/login_page.dart';
-import 'package:financial_management/pages/register/register_page.dart';
 import 'package:financial_management/pages/root/root_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +26,6 @@ class _RootPageState extends State<RootPage> {
     RootPageModel pageModel = Provider.of<RootPageModel>(context);
     pageModel.appInit(context);
 
-    return pageModel.isComebackApp ? LoginPage() : IntroductionPage();
+    return pageModel.isComebackApp ? const LoginPage() : const IntroductionPage();
   }
 }

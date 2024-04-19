@@ -28,10 +28,10 @@ class TransactionService {
     Response response = await http.execute();
     List<TransactionHistoryModel> list = [];
 
-    List<dynamic>.from(response.data).forEach((dynamic json) {
+    for (var json in List<dynamic>.from(response.data)) {
       final TransactionHistoryModel transaction = TransactionHistoryModel.fromJson(json);
       list.add(transaction);
-    }); 
+    } 
     
     return list;
   }
@@ -44,11 +44,21 @@ class TransactionService {
     Response response = await http.execute();
     List<CategoryModel> list = [];
 
-    List<dynamic>.from(response.data).forEach((dynamic json) {
+    for (var json in List<dynamic>.from(response.data)) {
       final CategoryModel transaction = CategoryModel.fromJson(json);
       list.add(transaction);
-    }); 
+    } 
     
     return list;
+  }
+
+  Future<InOutAnalyticsChartModel> getListInOutTransaction(Map<String, String> queries) async {
+    http.withPath('in-out');
+    http.makeGet();
+    http.withQueries(queries);
+
+    Response response = await http.execute();
+    final InOutAnalyticsChartModel data = InOutAnalyticsChartModel.fromJson(response.data);
+    return data;
   }
 }

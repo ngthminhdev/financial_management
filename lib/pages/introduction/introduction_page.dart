@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class IntroductionPage extends StatefulWidget {
-  IntroductionPage({super.key});
+  const IntroductionPage({super.key});
 
   @override
   State<IntroductionPage> createState() => _IntroductionPageState();

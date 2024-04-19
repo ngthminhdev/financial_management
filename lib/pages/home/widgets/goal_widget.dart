@@ -55,10 +55,10 @@ class _GoalWidgetState extends State<GoalWidget> {
                     CategoryIconWidget(
                         icon: Remix.macbook_line,
                         color: appColors.strongOrange),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    Text(
+                    const Text(
                       "Macbook Pro",
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -66,15 +66,15 @@ class _GoalWidgetState extends State<GoalWidget> {
                   ],
                 ),
               ),
-              PercentIcon(
+              const PercentIcon(
                 percent: 10.7,
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          PercentBar(
+          const PercentBar(
             target: 24000000,
             current: 2461000,
           ),
@@ -97,20 +97,20 @@ class _GoalWidgetState extends State<GoalWidget> {
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           OpenContainer(
             transitionType: ContainerTransitionType.fade,
-            transitionDuration: Duration(milliseconds: 500),
-            openBuilder: (context, _) => RegisterPage(),
+            transitionDuration: const Duration(milliseconds: 500),
+            openBuilder: (context, _) => const RegisterPage(),
             closedBuilder: (context, VoidCallback openContainer) => FMButton(
               text: "Thêm mục tiêu",
               type: FMButtonType.attention,
               size: FMButtonSize.max,
               icon: Container(
-                margin: EdgeInsets.only(right: 5),
-                child: Icon(
+                margin: const EdgeInsets.only(right: 5),
+                child: const Icon(
                   Remix.add_circle_fill,
                   size: 24,
                   color: Colors.white,

@@ -121,7 +121,7 @@ class CategorySpendChart extends StatelessWidget {
               height: 30,
               alignment: Alignment.center,
               child: AutoSizeText(
-                '\$ ${NumberHelper.formatMoney(-total)}',
+                NumberHelper.formatMoney(total),
                 maxLines: 1,
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: appColors.white),
@@ -142,7 +142,7 @@ class CategorySpendChart extends StatelessWidget {
           yValueMapper: (CategoryModel data, _) => data.amountUsed,
           dataLabelMapper: (CategoryModel data, _) =>
               // data.name,
-              NumberHelper.formatMoney(-data.amountUsed!),
+              NumberHelper.formatMoney(data.amountUsed!),
           pointColorMapper: (CategoryModel data, _) => data.color,
           dataLabelSettings: const DataLabelSettings(
             isVisible: true,

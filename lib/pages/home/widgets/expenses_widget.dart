@@ -41,10 +41,10 @@ class _ExpensesWidgetState extends State<ExpensesWidget> {
               fontSize: 17,
             ),
           ),
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width * 0.43 - 30,
             height: MediaQuery.of(context).size.height * 0.23,
-            child: Column(
+            child: const Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -63,7 +63,7 @@ class _ExpensesWidgetState extends State<ExpensesWidget> {
               ],
             ),
           ),
-          AutoSizeText(
+          const AutoSizeText(
             "+11 chi phí khác",
             style: TextStyle(
               fontWeight: FontWeight.bold,

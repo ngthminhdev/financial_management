@@ -5,7 +5,6 @@ import 'package:financial_management/widgets/button/button.dart';
 import 'package:financial_management/widgets/button/button_constant.dart';
 import 'package:financial_management/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -115,7 +114,7 @@ class Popup {
 
   void textAreaPopup(BuildContext context,
       {required Function(String?) callback, Widget? title}) async {
-    TextEditingController _controller = TextEditingController();
+    TextEditingController controller = TextEditingController();
     dynamic value = await showGeneralDialog(
       context: context,
       barrierColor: Colors.black45,
@@ -168,7 +167,7 @@ class Popup {
                                             52,
                                   ),
                                   child: TextFormField(
-                                    controller: _controller,
+                                    controller: controller,
                                     textAlign: TextAlign.start,
                                     minLines: 5,
                                     maxLines: 10,
@@ -221,7 +220,7 @@ class Popup {
                                   text: "Lưu",
                                   size: FMButtonSize.max,
                                   onPressed: () {
-                                    final String note = _controller.text;
+                                    final String note = controller.text;
                                     Navigator.of(context).pop(note);
                                   },
                                 )
@@ -432,7 +431,7 @@ class Popup {
       return navigatorHelper.changeView(context, RouteNames.login,
           isReplaceName: true);
     }
-    if (callback != null && callback is Function) {
+    if (callback != null) {
       callback();
     }
   }

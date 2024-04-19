@@ -6,8 +6,8 @@ class BasePage<T extends ChangeNotifier> extends StatefulWidget {
   final T model;
   final Function(BuildContext, T, Widget)? builder;
   final bool modelWillDispose;
-  BasePage(
-      {this.child,
+  const BasePage(
+      {super.key, this.child,
       required this.model,
       this.builder,
       this.modelWillDispose = false});

@@ -20,10 +20,10 @@ class CategoryService {
     Response response = await http.execute();
     List<CategoryModel> list = [];
 
-    List<dynamic>.from(response.data).forEach((dynamic json) {
+    for (var json in List<dynamic>.from(response.data)) {
       final CategoryModel category = CategoryModel.fromJson(json);
       list.add(category);
-    }); 
+    } 
     
     return list;
   }

@@ -3,7 +3,7 @@ import 'package:financial_management/constant/app_constant.dart';
 import 'package:financial_management/core/color.dart';
 import 'package:financial_management/helper/date_helper.dart';
 import 'package:financial_management/helper/number_helper.dart';
-import 'package:financial_management/pages/analytics/budget_analytics_page_model.dart';
+import 'package:financial_management/pages/analytics/budget_analytics/budget_analytics_page_model.dart';
 import 'package:financial_management/widgets/budget_chart/category_icon_widget.dart';
 import 'package:financial_management/widgets/category_spent_chart/category_spent_chart.dart';
 import 'package:financial_management/widgets/loading/category_icon_sketch.dart';
@@ -14,7 +14,8 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:remixicon/remixicon.dart';
 
 class BudgetAnalyticsPage extends StatefulWidget {
-  const BudgetAnalyticsPage({super.key});
+  Map<String, String>? params;
+  BudgetAnalyticsPage({super.key, required this.params});
 
   @override
   State<BudgetAnalyticsPage> createState() => _BudgetAnalyticsPageState();
@@ -35,7 +36,7 @@ class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage>
   }
 
   @override
-  Function(BuildContext context, BudgetAnalyticPageModel _model, Widget? _child)
+  Function(BuildContext context, BudgetAnalyticPageModel model, Widget? child)
       withBuilder() {
     return (BuildContext context, BudgetAnalyticPageModel model,
         Widget? child) {
@@ -49,7 +50,7 @@ class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage>
 
   @override
   void initState() {
-    pageModel.initData(context);
+    pageModel.initData(context, widget.params!['type']!);
     super.initState();
   }
 
@@ -64,7 +65,7 @@ class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage>
             children: [
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text(
-                  "Chi tiết khoản chi",
+                  pageModel.title,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
@@ -78,7 +79,7 @@ class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage>
                 chartData: pageModel.chartData,
                 total: pageModel.totalSpent,
               ),
-              const SizedBox(
+              const SizedBox( 
                 height: 22,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -242,7 +243,7 @@ class _BudgetAnalyticsPageState extends State<BudgetAnalyticsPage>
                               Text(
                                 NumberHelper.formatMoney(transaction.amount!),
                                 style: TextStyle(
-                                  color: appColors.strongOrange,
+                                  color: pageModel.textColor,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
