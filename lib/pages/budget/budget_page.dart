@@ -7,7 +7,7 @@ import 'package:financial_management/widgets/budget_chart/category_icon_widget.d
 import 'package:financial_management/widgets/button/button_constant.dart';
 import 'package:financial_management/widgets/button/row_select.dart';
 import 'package:financial_management/widgets/loading/loading_widget.dart';
-import 'package:financial_management/widgets/popups/select_popup_widget.dart';
+import 'package:financial_management/widgets/popups/app_popup.dart';
 import 'package:financial_management/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -330,7 +330,7 @@ class _BudgetPageState extends State<BudgetPage>
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: appColors.darkPurple)),
-                                    initialValue: pageModel.note!,
+                                    initialValue: pageModel.note ?? '',
                             callback: (String? value) {
                               setState(() {
                                 pageModel.setNote(value);

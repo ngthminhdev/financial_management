@@ -30,7 +30,7 @@ class Popup {
     dynamic value = await showGeneralDialog(
       context: context,
       barrierColor: Colors.black45,
-      transitionDuration: const Duration(milliseconds: 300),
+      transitionDuration: const Duration(milliseconds: 150),
       pageBuilder: (context, animation, secondaryAnimation) {
         return StatefulBuilder(builder: (context, setState) {
           return AnimatedBuilder(
@@ -119,7 +119,7 @@ class Popup {
     dynamic value = await showGeneralDialog(
       context: context,
       barrierColor: Colors.black45,
-      transitionDuration: const Duration(milliseconds: 300),
+      transitionDuration: const Duration(milliseconds: 150),
       pageBuilder: (context, animation, secondaryAnimation) {
         return StatefulBuilder(builder: (context, setState) {
           return AnimatedBuilder(
@@ -243,7 +243,7 @@ class Popup {
     dynamic value = await showGeneralDialog(
       context: context,
       barrierColor: Colors.black45,
-      transitionDuration: const Duration(milliseconds: 300),
+      transitionDuration: const Duration(milliseconds: 150),
       pageBuilder: (context, animation, secondaryAnimation) {
         return StatefulBuilder(builder: (context, setState) {
           return AnimatedBuilder(
@@ -344,7 +344,7 @@ class Popup {
     await showGeneralDialog(
       context: context,
       barrierColor: Colors.black45,
-      transitionDuration: const Duration(milliseconds: 300),
+      transitionDuration: const Duration(milliseconds: 150),
       pageBuilder: (context, animation, secondaryAnimation) {
         return StatefulBuilder(builder: (context, setState) {
           return AnimatedBuilder(
@@ -444,7 +444,7 @@ class Popup {
       await showGeneralDialog(
         context: dialogKey.currentContext ?? context,
         barrierColor: Colors.black45,
-        // transitionDuration: const Duration(milliseconds: 300),
+        // transitionDuration: const Duration(milliseconds: 150),
         pageBuilder: (context, animation, secondaryAnimation) {
           return StatefulBuilder(builder: (context, setState) {
             return const LoadingWidget();

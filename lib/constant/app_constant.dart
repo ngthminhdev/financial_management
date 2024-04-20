@@ -1,6 +1,6 @@
 import 'package:financial_management/core/color.dart';
 import 'package:financial_management/widgets/button/row_select.dart';
-import 'package:financial_management/widgets/popups/select_popup_widget.dart';
+import 'package:financial_management/widgets/popups/app_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:remixicon/remixicon.dart';

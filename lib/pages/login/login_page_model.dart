@@ -8,7 +8,7 @@ import 'package:financial_management/router/router_config.dart';
 import 'package:financial_management/services/api/auth_service.dart';
 import 'package:financial_management/services/http_service.dart';
 import 'package:financial_management/services/local_storage_service.dart';
-import 'package:financial_management/widgets/popups/select_popup_widget.dart';
+import 'package:financial_management/widgets/popups/app_popup.dart';
 import 'package:flutter/material.dart';
 
 class LoginPageModel extends BasePageModel {

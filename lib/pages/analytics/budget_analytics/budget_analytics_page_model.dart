@@ -6,7 +6,7 @@ import 'package:financial_management/model/transaction_history_model.dart';
 import 'package:financial_management/pages/budget/constants.dart';
 import 'package:financial_management/services/api/transaction_service.dart';
 import 'package:financial_management/services/http_service.dart';
-import 'package:financial_management/widgets/popups/select_popup_widget.dart';
+import 'package:financial_management/widgets/popups/app_popup.dart';
 import 'package:flutter/material.dart';
 
 class BudgetAnalyticPageModel extends BasePageModel {
