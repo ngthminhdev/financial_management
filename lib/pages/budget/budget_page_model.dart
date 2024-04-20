@@ -26,7 +26,7 @@ class BudgetPageModel extends BasePageModel {
 
   DateTime selectedDate = DateTime.now();
   String? note;
-  int transactionType = TRANSACTION_TYPE_INCOME;
+  int transactionType = TRANSACTION_TYPE_SPENT;
 
   initData(BuildContext context) async {
     amountController.text = "";
@@ -98,6 +98,10 @@ class BudgetPageModel extends BasePageModel {
 
   Future<void> createTransaction(BuildContext context) async {
     try {
+      if (selectedCategory == null || amountController.text.isEmpty) {
+        return appPopup.messagePopup(context,
+            message: 'Vui lòng nhập đủ thông tin', type: PopupType.warning);
+      }
       setBusy(true);
       Map<String, dynamic> body = {
         "type": transactionType,
