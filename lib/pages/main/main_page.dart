@@ -17,7 +17,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   late PageController _pageController;
-  int selectedIndex = 3;
+  int selectedIndex = 2;
 
   final List<Widget> _listOfPages = <Widget>[
     Container(alignment: Alignment.center, child: const HomePage()),

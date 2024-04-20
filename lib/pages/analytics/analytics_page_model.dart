@@ -3,7 +3,7 @@ import 'package:financial_management/constant/app_constant.dart';
 import 'package:financial_management/model/transaction_history_model.dart';
 import 'package:financial_management/services/api/transaction_service.dart';
 import 'package:financial_management/services/http_service.dart';
-import 'package:financial_management/widgets/popups/select_popup_widget.dart';
+import 'package:financial_management/widgets/popups/app_popup.dart';
 import 'package:flutter/material.dart';
 
 class AnalyticPageModel extends BasePageModel {

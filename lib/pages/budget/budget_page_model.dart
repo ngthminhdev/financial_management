@@ -8,7 +8,7 @@ import 'package:financial_management/services/api/category_service.dart';
 import 'package:financial_management/services/api/transaction_service.dart';
 import 'package:financial_management/services/http_service.dart';
 import 'package:financial_management/widgets/button/row_select.dart';
-import 'package:financial_management/widgets/popups/select_popup_widget.dart';
+import 'package:financial_management/widgets/popups/app_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
@@ -88,7 +88,7 @@ class BudgetPageModel extends BasePageModel {
   }
 
   setTransactionType(int? value) {
-    if (value == 0) {
+    if (value == 1) {
       transactionType = TRANSACTION_TYPE_INCOME;
     } else {
       transactionType = TRANSACTION_TYPE_SPENT;
