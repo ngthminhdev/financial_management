@@ -13,6 +13,13 @@ class AppConstant {
 
   final String unknownError = "Lỗi không xác định";
 
+  final Map<int, IconData> walletIconMap = {
+    1: Ionicons.wallet,
+    2: Remix.hand_coin_fill,
+    3: Remix.funds_fill,
+    4: Remix.more_fill,
+  };
+
   final List<PopupItem> budgetSelects = [
     PopupItem(
         widget: RowSelectWidget(

@@ -1,18 +1,18 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:financial_management/core/color.dart';
 import 'package:financial_management/helper/date_helper.dart';
 import 'package:financial_management/helper/number_helper.dart';
+import 'package:financial_management/model/wallet_model.dart';
 import 'package:financial_management/widgets/budget_chart/budget_chart.dart';
+import 'package:financial_management/widgets/loading/line_sketch.dart';
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
-class BudgetWidget extends StatefulWidget {
-  const BudgetWidget({super.key});
-
-  @override
-  State<BudgetWidget> createState() => _BudgetWidgetState();
-}
-
-class _BudgetWidgetState extends State<BudgetWidget> {
-  String currentMonth = DateHelper.getCurrentMonthYear();
-  double totalBudget = 13135000;
+class BudgetWidget extends StatelessWidget {
+  // String currentMonth = DateHelper.getCurrentMonthYear();
+  // double totalBudget = 13135000;
+  WalletModel? wallet;
+  BudgetWidget(this.wallet);
 
   @override
   Widget build(BuildContext context) {
@@ -33,47 +33,126 @@ class _BudgetWidgetState extends State<BudgetWidget> {
           ),
         ],
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Ngân sách",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 17,
-            ),
+      child: wallet != null ? buildBody(context) : buildBodySketch(context),
+    );
+  }
+
+  Column buildBody(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Ngân sách",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
           ),
-          Text(
-            currentMonth,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
-              color: Colors.grey,
-            ),
+        ),
+        Text(
+          DateHelper.getCurrentMonthYear(
+              DateTime.parse(wallet!.date!).toLocal()),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 12,
+            color: Colors.grey,
           ),
-          const SizedBox(height: 5),
-          Text(
-            "\$ ${NumberHelper.formatMoney(totalBudget)}",
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 17,
-              color: Colors.black,
-            ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          "\$ ${NumberHelper.formatMoney(wallet!.income!)}",
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+            color: Colors.black,
           ),
-          SizedBox(
-            // color: Colors.red,
-            width: MediaQuery.of(context).size.width * 0.43 - 30,
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                BudgetChart(),
-              ],
-            ),
-          )
-        ],
-      ),
+        ),
+        SizedBox(
+          // color: Colors.red,
+          width: MediaQuery.of(context).size.width * 0.43 - 30,
+          child: Column(
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  BudgetChart(wallet),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Symbols.do_not_disturb_on,
+                    size: 14,
+                    color: appColors.strongOrange,
+                  ),
+                  AutoSizeText(
+                    " ${NumberHelper.formatMoney(wallet!.spent!.abs())}",
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: appColors.strongOrange,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Symbols.add_circle,
+                    size: 14,
+                    color: appColors.green,
+                  ),
+                  AutoSizeText(
+                    " ${NumberHelper.formatMoney(wallet!.balance!)}",
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: appColors.green,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  Column buildBodySketch(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        LineSketch(70, 16),
+        const SizedBox(height: 5),
+        LineSketch(90, 14),
+        const SizedBox(height: 5),
+        LineSketch(130, 17),
+        SizedBox(
+          // color: Colors.red,
+          width: MediaQuery.of(context).size.width * 0.43 - 30,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  BudgetChart(null),
+                ],
+              ),
+              const SizedBox(height: 10),
+              LineSketch(130, 16),
+              const SizedBox(height: 5),
+              LineSketch(130, 16),
+            ],
+          ),
+        )
+      ],
     );
   }
 }

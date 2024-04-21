@@ -9,6 +9,7 @@ import 'package:financial_management/widgets/loading/line_sketch.dart';
 import 'package:financial_management/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:lottie/lottie.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -73,27 +74,26 @@ class _MorePageState extends State<MorePage>
                 height: 32,
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                height: 200,
-                width: MediaQuery.of(context).size.width - 40,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey
-                          .withOpacity(0.2), // Màu và độ trong suốt của shadow
-                      spreadRadius: 2, // Độ lan rộng của shadow
-                      blurRadius: 5, // Độ mờ của shadow
-                      offset: const Offset(
-                          0, 3), // Độ dịch chuyển của shadow (x, y)
-                    ),
-                  ],
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: pageModel.user == null 
-                  ? buildInformationSketch()
-                  : buildInformation()
-              ),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  height: 200,
+                  width: MediaQuery.of(context).size.width - 40,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(
+                            0.2), // Màu và độ trong suốt của shadow
+                        spreadRadius: 2, // Độ lan rộng của shadow
+                        blurRadius: 5, // Độ mờ của shadow
+                        offset: const Offset(
+                            0, 3), // Độ dịch chuyển của shadow (x, y)
+                      ),
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: pageModel.user == null
+                      ? buildInformationSketch()
+                      : buildInformation()),
               const SizedBox(
                 height: 32,
               ),
@@ -205,36 +205,32 @@ class _MorePageState extends State<MorePage>
               const SizedBox(
                 height: 16,
               ),
-              OpenContainer(
-                transitionType: ContainerTransitionType.fade,
-                transitionDuration: const Duration(milliseconds: 500),
-                openBuilder: (context, _) => const LoginPage(),
-                closedBuilder: (context, VoidCallback openContainer) =>
-                    GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  // onTap: openContainer,
-                  onTap: () {},
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(
-                              0.2), // Màu và độ trong suốt của shadow
-                          spreadRadius: 2, // Độ lan rộng của shadow
-                          blurRadius: 5, // Độ mờ của shadow
-                          offset: const Offset(
-                              0, 3), // Độ dịch chuyển của shadow (x, y)
-                        ),
-                      ],
-                      color: Colors.white,
-                    ),
-                    child: const RowSelectWidget(
-                      title: 'Đăng xuất',
-                      icon: Remix.logout_box_fill,
-                      // color: appColors.green,
-                    ),
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                // onTap: openContainer,
+                onTap: () {
+                  pageModel.logout();
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(
+                            0.2), // Màu và độ trong suốt của shadow
+                        spreadRadius: 2, // Độ lan rộng của shadow
+                        blurRadius: 5, // Độ mờ của shadow
+                        offset: const Offset(
+                            0, 3), // Độ dịch chuyển của shadow (x, y)
+                      ),
+                    ],
+                    color: Colors.white,
+                  ),
+                  child: const RowSelectWidget(
+                    title: 'Đăng xuất',
+                    icon: Remix.logout_box_fill,
+                    // color: appColors.green,
                   ),
                 ),
               ),
@@ -379,15 +375,25 @@ class _MorePageState extends State<MorePage>
                 end: Alignment.bottomRight,
               ),
             ),
-            child: const CircleAvatar(
-              radius: 60,
-              backgroundColor: Colors.transparent,
-              child: CircleAvatar(
-                radius: 53,
-                backgroundImage: AssetImage(
-                  'assets/images/avatar.jpg',
+            child: Stack(
+              children: [
+                const CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.transparent,
+                  child: CircleAvatar(
+                    radius: 53,
+                    backgroundImage: AssetImage(
+                      'assets/images/avatar.jpg',
+                    ),
+                  ),
                 ),
-              ),
+                if (pageModel.user!.memberShipType == MEMBER_SHIP_PREMIUM)
+                  Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: Lottie.asset('assets/animation/crown_bandage.json',
+                          width: 45)),
+              ],
             ),
           ),
         ]),
@@ -442,7 +448,9 @@ class _MorePageState extends State<MorePage>
                     color: appColors.charcoal),
               ),
               Text(
-                pageModel.user!.memberShipType == MEMBER_SHIP_STANDARD ? " Standard" : " Premium",
+                pageModel.user!.memberShipType == MEMBER_SHIP_STANDARD
+                    ? " Standard"
+                    : " Premium",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,

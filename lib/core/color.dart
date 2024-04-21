@@ -42,7 +42,8 @@ class AppColors {
   final lightPink = HexColor.fromHex('#f3edff');
   final darkCharcoal = HexColor.fromHex('#58535f');
   final red = HexColor.fromHex("#CF2F2F");
-
+  final transparent = Colors.transparent;
+  
   static Color randomColor() {
     final String hex = RandomColor.getColor(
         Options(format: Format.hex, luminosity: Luminosity.bright));

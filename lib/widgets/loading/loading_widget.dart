@@ -1,6 +1,7 @@
 import 'package:financial_management/core/color.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:lottie/lottie.dart';
 
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({
@@ -16,11 +17,17 @@ class LoadingWidget extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.black38,
         body: Center(
-            child: LoadingAnimationWidget.discreteCircle(
-                size: 50,
+            child: Stack(
+          children: [
+            LoadingAnimationWidget.discreteCircle(
+                size: 60,
                 color: appColors.purple,
                 secondRingColor: appColors.mediumPurple,
-                thirdRingColor: appColors.lightPurple)),
+                thirdRingColor: appColors.lightPurple),
+            Positioned(
+                child: Lottie.asset('assets/animation/d_coin.json', width: 60, )),
+          ],
+        )),
       ),
     );
   }

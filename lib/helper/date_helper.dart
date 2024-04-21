@@ -1,8 +1,8 @@
 import 'package:intl/intl.dart';
 
 class DateHelper {
-  static String getCurrentMonthYear() {
-    DateTime now = DateTime.now();
+  static String getCurrentMonthYear([DateTime? date]) {
+    DateTime now = date ?? DateTime.now();
     String month = '';
     switch (now.month) {
       case 1:

@@ -1,10 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:financial_management/constant/app_constant.dart';
+import 'package:financial_management/model/category_model.dart';
 import 'package:financial_management/widgets/cards/category_card_widget.dart';
+import 'package:financial_management/widgets/loading/category_icon_sketch.dart';
+import 'package:financial_management/widgets/loading/line_sketch.dart';
 import 'package:flutter/material.dart';
 import 'package:remixicon/remixicon.dart';
 
 class ExpensesWidget extends StatefulWidget {
-  const ExpensesWidget({super.key});
+  List<CategoryModel> listExpensive = [];
+  ExpensesWidget(this.listExpensive);
 
   @override
   State<ExpensesWidget> createState() => _ExpensesWidgetState();
@@ -13,6 +18,9 @@ class ExpensesWidget extends StatefulWidget {
 class _ExpensesWidgetState extends State<ExpensesWidget> {
   @override
   Widget build(BuildContext context) {
+    int otherCategory = widget.listExpensive.length - 4 > 0
+        ? widget.listExpensive.length - 4
+        : 0;
     return Container(
       padding: const EdgeInsets.all(15),
       width: MediaQuery.of(context).size.width * 0.43,
@@ -41,34 +49,58 @@ class _ExpensesWidgetState extends State<ExpensesWidget> {
               fontSize: 17,
             ),
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.43 - 30,
-            height: MediaQuery.of(context).size.height * 0.23,
-            child: const Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CategoryCardWidget(
-                    icon: Remix.motorbike_fill,
-                    name: 'Xe cộ',
-                    amountUsed: 2322150),
-                CategoryCardWidget(
-                    icon: Remix.restaurant_fill,
-                    name: 'Thực phẩm',
-                    amountUsed: 1090240),
-                CategoryCardWidget(
-                    icon: Remix.drinks_2_fill,
-                    name: 'Giải khát',
-                    amountUsed: 540320),
-              ],
+          SingleChildScrollView(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.43 - 30,
+              height: MediaQuery.of(context).size.height * 0.23,
+              child: ListView.separated(
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    if (widget.listExpensive.isEmpty) {
+                      return Row(
+                        children: [
+                          CategoryIconSketch(
+                              (MediaQuery.of(context).size.width * 0.43 - 30) *
+                                  0.3,
+                              40),
+                          const SizedBox(
+                            width: 12,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              LineSketch(90, 16),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              LineSketch(70, 14),
+                            ],
+                          )
+                        ],
+                      );
+                    }
+                    final CategoryModel category = widget.listExpensive[index];
+                    return CategoryCardWidget(
+                        icon: appConstant.categoryIconMap[category.icon]!,
+                        name: category.name,
+                        amountUsed: category.amountUsed!);
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 16,
+                    );
+                  }),
             ),
           ),
-          const AutoSizeText(
-            "+11 chi phí khác",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          widget.listExpensive.isEmpty
+              ? LineSketch(110, 16)
+              : AutoSizeText(
+                  "+$otherCategory chi phí khác",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
         ],
       ),
     );

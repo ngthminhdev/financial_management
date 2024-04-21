@@ -6,3 +6,9 @@ const int TRANSACTION_TYPE_SPENT = 2;
 
 const int MEMBER_SHIP_STANDARD = 1;
 const int MEMBER_SHIP_PREMIUM = 2;
+
+
+const int WALLET_TYPE_DEFAULT = 1;
+const int WALLET_TYPE_SPENT = 2;
+const int WALLET_TYPE_INVEST = 3;
+const int WALLET_TYPE_GOAT = 4;

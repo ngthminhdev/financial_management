@@ -5,6 +5,7 @@ import 'package:financial_management/widgets/button/button.dart';
 import 'package:financial_management/widgets/button/button_constant.dart';
 import 'package:financial_management/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -113,7 +114,9 @@ class Popup {
   }
 
   void textAreaPopup(BuildContext context,
-      {required Function(String?) callback, Widget? title, String initialValue = ''}) async {
+      {required Function(String?) callback,
+      Widget? title,
+      String initialValue = ''}) async {
     TextEditingController controller = TextEditingController();
     controller.text = initialValue;
     dynamic value = await showGeneralDialog(
@@ -457,11 +460,147 @@ class Popup {
     }
   }
 
+  Future<bool> confirm(BuildContext context, String message) async {
+    bool value = false;
+    await showGeneralDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      transitionDuration: const Duration(milliseconds: 150),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AnimatedBuilder(
+              animation: animation,
+              builder: (context, child) {
+                return Transform.scale(
+                  scale: animation.value,
+                  child: Scaffold(
+                    backgroundColor: Colors.transparent,
+                    body: Center(
+                        child: Stack(
+                      children: [
+                        Container(
+                          // padding: const EdgeInsets.only(bottom: 10),
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          constraints: BoxConstraints(
+                            maxWidth: MediaQuery.of(context).size.width * 0.7,
+                            maxHeight: MediaQuery.of(context).size.height * 0.4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(
+                                  'Thông báo',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: appColors.darkCharcoal,
+                                  ),
+                                ),
+                              ),
+                              Divider(
+                                thickness: 1,
+                                color: appColors.grey,
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, bottom: 10),
+                                child: Text(
+                                  message,
+                                  softWrap: true,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: appColors.charcoal,
+                                  ),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      decoration: BoxDecoration(
+                                        color: appColors.transparent,
+                                        borderRadius: const BorderRadius.only(
+                                            bottomLeft: Radius.circular(10)),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 10),
+                                      child: Text(
+                                        'Đóng',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: appColors.darkCharcoal,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      value = false;
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  GestureDetector(
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      decoration: BoxDecoration(
+                                        color: appColors.purple,
+                                        borderRadius: const BorderRadius.only(
+                                            bottomRight: Radius.circular(10)),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 10),
+                                      child: Text(
+                                        'Xác nhận',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: appColors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      value = true;
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                            right: 5,
+                            top: 5,
+                            child: Lottie.asset(
+                                'assets/animation/announcement.json',
+                                width: 30))
+                      ],
+                    )),
+                  ),
+                );
+              });
+        });
+      },
+    );
+    return value;
+  }
+
   factory Popup() {
     return _instance;
   }
   Popup._internal();
 }
-
 
 final appPopup = Popup();
