@@ -124,12 +124,12 @@ class _AnalyticsPageState extends State<AnalyticsPage> with MixinModel<AnalyticP
                             Remix.git_commit_fill,
                             color: appColors.green,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 6,
                           ),
                           Container(
-                              margin: EdgeInsets.only(bottom: 3),
-                              child: Text('Thu'))
+                              margin: const EdgeInsets.only(bottom: 3),
+                              child: const Text('Thu'))
                         ],
                       ),
                     ],
@@ -161,12 +161,12 @@ class _AnalyticsPageState extends State<AnalyticsPage> with MixinModel<AnalyticP
                             Remix.git_commit_fill,
                             color: appColors.strongOrange,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 6,
                           ),
                           Container(
-                              margin: EdgeInsets.only(bottom: 3),
-                              child: Text('Chi'))
+                              margin: const EdgeInsets.only(bottom: 3),
+                              child: const Text('Chi'))
                         ],
                       )
                     ],

@@ -23,39 +23,42 @@ class RowSelectWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
-          children: [
-            CategoryIconWidget(icon: icon, color: color),
-            const SizedBox(
-              width: 10,
-            ),
-            Text(title,
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: appColors.charcoal)),
-          ],
-        ),
-        Row(
-          children: [
-            if (showValue == true && value != null)
-              Text(value!,
-              overflow: TextOverflow.ellipsis,
+    return Container(
+      color: appColors.transparent,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              CategoryIconWidget(icon: icon, color: color),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(title,
                   style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                       color: appColors.charcoal)),
-            const SizedBox(
-              width: 5,
-            ),
-            if (showArrow) Icon(Remix.arrow_right_s_line, color: appColors.charcoal)
-          ],
-        )
-      ],
+            ],
+          ),
+          Row(
+            children: [
+              if (showValue == true && value != null)
+                Text(value!,
+                overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                        color: appColors.charcoal)),
+              const SizedBox(
+                width: 5,
+              ),
+              if (showArrow) Icon(Remix.arrow_right_s_line, color: appColors.charcoal)
+            ],
+          )
+        ],
+      ),
     );
   }
 }

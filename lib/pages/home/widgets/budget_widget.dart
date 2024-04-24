@@ -12,7 +12,7 @@ class BudgetWidget extends StatelessWidget {
   // String currentMonth = DateHelper.getCurrentMonthYear();
   // double totalBudget = 13135000;
   WalletModel? wallet;
-  BudgetWidget(this.wallet);
+  BudgetWidget(this.wallet, {super.key});
 
   @override
   Widget build(BuildContext context) {

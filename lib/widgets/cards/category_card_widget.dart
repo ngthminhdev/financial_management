@@ -19,7 +19,6 @@ class CategoryCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.43 - 30,
       height: 40,
@@ -34,19 +33,36 @@ class CategoryCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Colors.grey,
+                  SizedBox(
+                    width:
+                        (MediaQuery.of(context).size.width * 0.43 - 30) * 0.65,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: AutoSizeText(
+                        name,
+                        textAlign: TextAlign.start,
+                        maxFontSize: 13,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                      ),
                     ),
                   ),
-                  AutoSizeText(
-                    NumberHelper.formatMoney(amountUsed),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: appColors.strongOrange,
+                  SizedBox(
+                    width:
+                        (MediaQuery.of(context).size.width * 0.43 - 30) * 0.65,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: AutoSizeText(
+                        NumberHelper.formatMoney(amountUsed),
+                        maxFontSize: 15,
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: appColors.strongOrange,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -56,4 +72,3 @@ class CategoryCardWidget extends StatelessWidget {
     );
   }
 }
-

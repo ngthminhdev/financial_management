@@ -5,11 +5,10 @@ import 'package:financial_management/widgets/cards/category_card_widget.dart';
 import 'package:financial_management/widgets/loading/category_icon_sketch.dart';
 import 'package:financial_management/widgets/loading/line_sketch.dart';
 import 'package:flutter/material.dart';
-import 'package:remixicon/remixicon.dart';
 
 class ExpensesWidget extends StatefulWidget {
   List<CategoryModel> listExpensive = [];
-  ExpensesWidget(this.listExpensive);
+  ExpensesWidget(this.listExpensive, {super.key});
 
   @override
   State<ExpensesWidget> createState() => _ExpensesWidgetState();
@@ -19,7 +18,7 @@ class _ExpensesWidgetState extends State<ExpensesWidget> {
   @override
   Widget build(BuildContext context) {
     int otherCategory = widget.listExpensive.length - 4 > 0
-        ? widget.listExpensive.length - 4
+        ? widget.listExpensive.length - 3
         : 0;
     return Container(
       padding: const EdgeInsets.all(15),

@@ -19,14 +19,23 @@ class BudgetPageModel extends BasePageModel {
     initialValue: 0,
     precision: 3,
   );
+  TextEditingController noteController = TextEditingController();
 
   List<PopupItem> listCategories = [];
+  List<PopupItem> listWallets = appConstant.budgetSelects;
   Map<String, CategoryModel> mapCategories = {};
   CategoryModel? selectedCategory;
 
   DateTime selectedDate = DateTime.now();
   String? note;
   int transactionType = TRANSACTION_TYPE_SPENT;
+
+  int? selectedSection;
+
+  setSelectedSection(int? section) {
+    selectedSection = section;
+    notifyListeners();
+  }
 
   initData(BuildContext context) async {
     amountController.text = "";
@@ -35,8 +44,10 @@ class BudgetPageModel extends BasePageModel {
 
   resetData() {
     selectedCategory = null;
+    selectedSection = null;
     note = null;
     amountController.text = "";
+    noteController.text = "";
     notifyListeners();
   }
 

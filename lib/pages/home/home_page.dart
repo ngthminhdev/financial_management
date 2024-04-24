@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage>
                       ? LineSketch(200, 17) 
                       : Text(
                         "Chào mừng ${pageModel.user!.username}!",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
                         ),

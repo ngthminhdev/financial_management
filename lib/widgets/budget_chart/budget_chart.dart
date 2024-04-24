@@ -8,7 +8,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class BudgetChart extends StatelessWidget {
   WalletModel? wallet;
   // List<ChartData> chartData = [];
-  BudgetChart(this.wallet);
+  BudgetChart(this.wallet, {super.key});
 
   @override
   Widget build(BuildContext context) {
