@@ -7,9 +7,9 @@ import 'package:remixicon/remixicon.dart';
 
 class AppConstant {
   static final AppConstant _instance = AppConstant._internal();
-  final String apiHost = '192.168.0.78:2002';
+  // final String apiHost = '192.168.0.78:2002';
   // final String apiHost = '172.16.3.224:2002';
-  // final String apiHost = '54.179.222.129:2002';
+  final String apiHost = '54.179.222.129:2002';
 
   final String unknownError = "Lỗi không xác định";
 
